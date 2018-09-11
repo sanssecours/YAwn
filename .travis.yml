@@ -1,0 +1,24 @@
+language: cpp
+
+matrix:
+  include:
+    - os: osx
+      name: 🍏 Clang
+      compiler: clang
+      env:
+        - ASAN_OPTIONS=detect_leaks=1
+        - CXXFLAGS=-Werror
+
+    - os: osx
+      osx_image: xcode9.2
+      name: 🍏 GCC
+      compiler: gcc
+      env:
+        - CXXFLAGS=-Werror
+
+before_install:
+  - git clone https://github.com/vnmakarov/yaep.git
+  - cd yaep && ./configure && make -C src install && cd ..
+
+script:
+  - mkdir Build && cd Build && cmake ..
