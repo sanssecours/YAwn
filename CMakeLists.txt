@@ -22,4 +22,6 @@ find_package(YAEP REQUIRED)
 
 set(SOURCE_FILES ${SOURCE_DIRECTORY}/yawn.cpp)
 
+include_directories("${YAEP_INCLUDE_DIRS}")
 add_executable(yawn ${SOURCE_FILES})
+target_link_libraries(yawn yaep)

@@ -1,9 +1,3 @@
-#include <iostream>
+#include <yaep.h>
 
-using std::cout;
-using std::endl;
-
-int main() {
-  cout << "👋" << endl;
-  return 0;
-}
+int main() { return 0; }
