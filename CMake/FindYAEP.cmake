@@ -1,5 +1,5 @@
-# Try to find YAEAP
-# =================
+# Try to find YAEP
+# ================
 
 # ~~~
 # Once done this will define
