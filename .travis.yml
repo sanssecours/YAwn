@@ -32,7 +32,14 @@ before_install:
         export CC=/usr/local/opt/llvm/bin/clang
         export CXX=/usr/local/opt/llvm/bin/clang++
       fi
+      brew install ninja
     fi
 
+before_script:
+  - mkdir -p Build
+  - cd Build
+  - cmake -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+  - cd ..
+
 script:
-  - mkdir Build && cd Build && cmake ..
+  - ninja -C Build
