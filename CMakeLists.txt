@@ -19,3 +19,7 @@ endif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 
 find_package(YAEP REQUIRED)
+
+set(SOURCE_FILES ${SOURCE_DIRECTORY}/yawn.cpp)
+
+add_executable(yawn ${SOURCE_FILES})
