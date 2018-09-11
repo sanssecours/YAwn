@@ -20,7 +20,7 @@ set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 
 find_package(YAEP REQUIRED)
 
-set(SOURCE_FILES ${SOURCE_DIRECTORY}/yawn.cpp)
+set(SOURCE_FILES ${SOURCE_DIRECTORY}/yawn.cpp ${SOURCE_DIRECTORY}/objstack.h)
 
 include_directories("${YAEP_INCLUDE_DIRS}")
 add_executable(yawn ${SOURCE_FILES})
