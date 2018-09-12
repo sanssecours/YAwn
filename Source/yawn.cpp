@@ -93,12 +93,12 @@ int main() {
   token = 0;
   if (parser.parse_grammar(1, description) != 0) {
     cerr << "Unable to parse grammar:" << parser.error_message() << endl;
-    exit(1);
+    return EXIT_FAILURE;
   }
   if (parser.parse(readToken, syntaxError, allocate, NULL, &root,
                     &ambiguousInput)) {
     cerr << "Unable to parse input: " << parser.error_message() << endl;
-    exit(1);
+    return EXIT_FAILURE;
   }
-  exit(0);
+  return EXIT_SUCCESS;
 }
