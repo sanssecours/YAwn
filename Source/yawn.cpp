@@ -86,30 +86,24 @@ static const char *description = "\n"
                                  "  ;\n";
 
 int main() {
-  yaep *parser;
+  yaep parser;
   struct yaep_tree_node *root;
   int ambiguousInput;
 
   parseTreeMemory = new os(0);
-  parser = new yaep();
-  if (parser == NULL) {
-    cerr << "Unable to create parser object" << endl;
-    delete parseTreeMemory;
-    exit(1);
-  }
+
   token = 0;
-  if (parser->parse_grammar(1, description) != 0) {
-    cerr << "Unable to parse grammar:" << parser->error_message() << endl;
+  if (parser.parse_grammar(1, description) != 0) {
+    cerr << "Unable to parse grammar:" << parser.error_message() << endl;
     delete parseTreeMemory;
     exit(1);
   }
-  if (parser->parse(readToken, syntaxError, allocate, NULL, &root,
+  if (parser.parse(readToken, syntaxError, allocate, NULL, &root,
                     &ambiguousInput)) {
-    cerr << "Unable to parse input: " << parser->error_message() << endl;
+    cerr << "Unable to parse input: " << parser.error_message() << endl;
     delete parseTreeMemory;
     exit(1);
   }
-  delete parser;
   delete parseTreeMemory;
   exit(0);
 }
