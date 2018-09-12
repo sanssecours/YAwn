@@ -33,44 +33,43 @@ using std::cerr;
 using std::endl;
 
 /* All parser allocated memory is contained here. */
-static os_t *mem_os;
+static os_t *parseTreeMemory;
 
-static void *test_parse_alloc(int size) {
+static void *allocate(int size) {
   void *result;
 
-  mem_os->top_expand(size);
-  result = mem_os->top_begin();
-  mem_os->top_finish();
+  parseTreeMemory->top_expand(size);
+  result = parseTreeMemory->top_begin();
+  parseTreeMemory->top_finish();
   return result;
 }
 
 /* Print syntax error. */
 static void
-test_syntax_error(int err_tok_num, void *err_tok_attr __attribute__((unused)),
-                  int start_ignored_tok_num,
-                  void *start_ignored_tok_attr __attribute__((unused)),
-                  int start_recovered_tok_num,
-                  void *start_recovered_tok_attr __attribute__((unused))) {
-  cerr << "Syntax error on token “" << err_tok_num << "”" << endl;
-  if (start_ignored_tok_num > 0) {
-    cerr << "Ignoring " << (start_recovered_tok_num - start_ignored_tok_num)
-         << " tokens starting with token “" << start_ignored_tok_num << "”"
-         << endl;
+syntaxError(int errorToken, void *errorTokenAttribute __attribute__((unused)),
+            int firstIgnoredToken,
+            void *firstIgnoredTokenAttribute __attribute__((unused)),
+            int firstRecoveredToken,
+            void *firstRecoveredTokenAttribute __attribute__((unused))) {
+  cerr << "Syntax error on token “" << errorToken << "”" << endl;
+  if (firstIgnoredToken > 0) {
+    cerr << "Ignoring " << (firstRecoveredToken - firstIgnoredToken)
+         << " tokens starting with token “" << firstIgnoredToken << "”" << endl;
   }
 }
 
-/* The following variable stores the current number of next input token. */
-static int ntok;
+/* The following variable stores the index of next input token. */
+static int token;
 
-static int test_read_token(void **attr) {
+static int readToken(void **attribute) {
   const char input[] = "1+1";
 
-  ntok++;
-  *attr = NULL;
-  if (static_cast<size_t>(ntok) < sizeof(input))
-    return input[ntok - 1];
-  else
-    return -1;
+  token++;
+  *attribute = NULL;
+  if (static_cast<size_t>(token) < sizeof(input)) {
+    return input[token - 1];
+  }
+  return -1;
 }
 
 static const char *description = "\n"
@@ -87,30 +86,30 @@ static const char *description = "\n"
                                  "  ;\n";
 
 int main() {
-  yaep *e;
+  yaep *parser;
   struct yaep_tree_node *root;
-  int ambiguous_p;
+  int ambiguousInput;
 
-  mem_os = new os(0);
-  e = new yaep();
-  if (e == NULL) {
+  parseTreeMemory = new os(0);
+  parser = new yaep();
+  if (parser == NULL) {
     cerr << "Unable to create parser object" << endl;
-    delete mem_os;
+    delete parseTreeMemory;
     exit(1);
   }
-  ntok = 0;
-  if (e->parse_grammar(1, description) != 0) {
-    cerr << "Unable to parse grammar:" << e->error_message() << endl;
-    delete mem_os;
+  token = 0;
+  if (parser->parse_grammar(1, description) != 0) {
+    cerr << "Unable to parse grammar:" << parser->error_message() << endl;
+    delete parseTreeMemory;
     exit(1);
   }
-  if (e->parse(test_read_token, test_syntax_error, test_parse_alloc, NULL,
-               &root, &ambiguous_p)) {
-    cerr << "Unable to parse input: " << e->error_message() << endl;
-    delete mem_os;
+  if (parser->parse(readToken, syntaxError, allocate, NULL, &root,
+                    &ambiguousInput)) {
+    cerr << "Unable to parse input: " << parser->error_message() << endl;
+    delete parseTreeMemory;
     exit(1);
   }
-  delete e;
-  delete mem_os;
+  delete parser;
+  delete parseTreeMemory;
   exit(0);
 }
