@@ -33,14 +33,14 @@ using std::cerr;
 using std::endl;
 
 /* All parser allocated memory is contained here. */
-static os_t *parseTreeMemory;
+static os_t parseTreeMemory;
 
 static void *allocate(int size) {
   void *result;
 
-  parseTreeMemory->top_expand(size);
-  result = parseTreeMemory->top_begin();
-  parseTreeMemory->top_finish();
+  parseTreeMemory.top_expand(size);
+  result = parseTreeMemory.top_begin();
+  parseTreeMemory.top_finish();
   return result;
 }
 
@@ -90,20 +90,15 @@ int main() {
   struct yaep_tree_node *root;
   int ambiguousInput;
 
-  parseTreeMemory = new os(0);
-
   token = 0;
   if (parser.parse_grammar(1, description) != 0) {
     cerr << "Unable to parse grammar:" << parser.error_message() << endl;
-    delete parseTreeMemory;
     exit(1);
   }
   if (parser.parse(readToken, syntaxError, allocate, NULL, &root,
                     &ambiguousInput)) {
     cerr << "Unable to parse input: " << parser.error_message() << endl;
-    delete parseTreeMemory;
     exit(1);
   }
-  delete parseTreeMemory;
   exit(0);
 }
