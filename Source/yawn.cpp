@@ -35,7 +35,7 @@ using std::endl;
 /* All parser allocated memory is contained here. */
 static os_t parseTreeMemory;
 
-static void *allocate(int size) {
+static void *alloc(int size) {
   void *result;
 
   parseTreeMemory.top_expand(size);
@@ -97,7 +97,7 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  if (parser.parse(readToken, syntaxError, allocate, NULL, &root,
+  if (parser.parse(readToken, syntaxError, alloc, NULL, &root,
                    &ambiguousInput)) {
     cerr << "Unable to parse input: " << parser.error_message() << endl;
     return EXIT_FAILURE;
