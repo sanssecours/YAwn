@@ -26,7 +26,11 @@
 
 #include "objstack.h"
 #include <cstdlib>
+#include <iostream>
 #include <yaep.h>
+
+using std::cerr;
+using std::endl;
 
 /* All parser allocated memory is contained here. */
 static os_t *mem_os;
@@ -47,14 +51,12 @@ test_syntax_error(int err_tok_num, void *err_tok_attr __attribute__((unused)),
                   void *start_ignored_tok_attr __attribute__((unused)),
                   int start_recovered_tok_num,
                   void *start_recovered_tok_attr __attribute__((unused))) {
-  if (start_ignored_tok_num < 0)
-    fprintf(stderr, "Syntax error on token %d\n", err_tok_num);
-  else
-    fprintf(
-        stderr,
-        "Syntax error on token %d:ignore %d tokens starting with token = %d\n",
-        err_tok_num, start_recovered_tok_num - start_ignored_tok_num,
-        start_ignored_tok_num);
+  cerr << "Syntax error on token “" << err_tok_num << "”" << endl;
+  if (start_ignored_tok_num > 0) {
+    cerr << "Ignoring " << (start_recovered_tok_num - start_ignored_tok_num)
+         << " tokens starting with token “" << start_ignored_tok_num << "”"
+         << endl;
+  }
 }
 
 /* The following variable stores the current number of next input token. */
@@ -92,19 +94,19 @@ int main() {
   mem_os = new os(0);
   e = new yaep();
   if (e == NULL) {
-    fprintf(stderr, "yaep::yaep: No memory\n");
+    cerr << "Unable to create parser object" << endl;
     delete mem_os;
     exit(1);
   }
   ntok = 0;
   if (e->parse_grammar(1, description) != 0) {
-    fprintf(stderr, "%s\n", e->error_message());
+    cerr << "Unable to parse grammar:" << e->error_message() << endl;
     delete mem_os;
     exit(1);
   }
   if (e->parse(test_read_token, test_syntax_error, test_parse_alloc, NULL,
                &root, &ambiguous_p)) {
-    fprintf(stderr, "yaep::parse: %s\n", e->error_message());
+    cerr << "Unable to parse input: " << e->error_message() << endl;
     delete mem_os;
     exit(1);
   }
