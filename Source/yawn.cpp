@@ -30,7 +30,9 @@
 #include <yaep.h>
 
 using std::cerr;
+using std::cout;
 using std::endl;
+using std::string;
 
 /* All parser allocated memory is contained here. */
 static os_t parseTreeMemory;
@@ -85,6 +87,22 @@ static const char *description = "\n"
                                  "  | '(' E ')' # 1\n"
                                  "  ;\n";
 
+static string toString(yaep_tree_node *node) {
+  switch (node->type) {
+  case yaep_tree_node_type::YAEP_NIL:
+    return "Nil";
+  case yaep_tree_node_type::YAEP_ERROR:
+    return "Error";
+  case yaep_tree_node_type::YAEP_TERM:
+    return "Terminal";
+  case yaep_tree_node_type::YAEP_ANODE:
+    return "Abstract Node";
+  case yaep_tree_node_type::YAEP_ALT:
+    return "Alternative";
+  }
+  return "Unknown";
+}
+
 int main() {
   yaep parser;
   struct yaep_tree_node *root;
@@ -102,6 +120,9 @@ int main() {
     cerr << "Unable to parse input: " << parser.error_message() << endl;
     return EXIT_FAILURE;
   }
+
+  cout << "Type of top node: " << toString(root) << endl;
+  cout << "Name of top node: " << (root->val).anode.name << endl;
 
   return EXIT_SUCCESS;
 }
