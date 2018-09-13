@@ -45,16 +45,16 @@ static void *alloc(int size) {
 }
 
 /* Print syntax error. */
-static void
-syntaxError(int errorToken, void *errorTokenAttribute __attribute__((unused)),
-            int firstIgnoredToken,
-            void *firstIgnoredTokenAttribute __attribute__((unused)),
-            int firstRecoveredToken,
-            void *firstRecoveredTokenAttribute __attribute__((unused))) {
+static void syntaxError(int errorToken,
+                        void *errorTokenData __attribute__((unused)),
+                        int ignoredToken,
+                        void *ignoredTokenData __attribute__((unused)),
+                        int recoveredToken,
+                        void *recoveredTokenData __attribute__((unused))) {
   cerr << "Syntax error on token “" << errorToken << "”" << endl;
-  if (firstIgnoredToken > 0) {
-    cerr << "Ignoring " << (firstRecoveredToken - firstIgnoredToken)
-         << " tokens starting with token “" << firstIgnoredToken << "”" << endl;
+  if (ignoredToken > 0) {
+    cerr << "Ignoring " << (recoveredToken - ignoredToken)
+         << " tokens starting with token “" << ignoredToken << "”" << endl;
   }
 }
 
