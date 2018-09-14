@@ -40,15 +40,8 @@ class Converter {
   const char *description = "\n"
                             "TERM\n"
                             "NUMBER = 49;\n"
-                            "E : T         # 0\n"
-                            "  | E '+' T   # plus (0 2)\n"
-                            "  ;\n"
-                            "T : F         # 0\n"
-                            "  | T '*' F   # mult (0 2)\n"
-                            "  ;\n"
-                            "F : NUMBER    # 0\n"
-                            "  | '(' E ')' # 1\n"
-                            "  ;\n";
+                            "START : NUMBER # 0\n"
+                            "      ;\n";
 
   static string toString(yaep_tree_node *node) {
     switch (node->type) {
@@ -95,7 +88,7 @@ public:
     }
 
     cout << "Type of top node: " << toString(root) << endl;
-    cout << "Name of top node: " << (root->val).anode.name << endl;
+    cout << "Code of top node: " << (root->val).term.code << endl;
 
     return EXIT_SUCCESS;
   }
