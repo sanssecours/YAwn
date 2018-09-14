@@ -38,6 +38,22 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
 
 void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
+/**
+ * @brief This function converts the given YAML file to keys and adds the
+ *        result to `keySet`.
+ *
+ * @param keySet The function adds the converted keys to this variable.
+ * @param parent The function uses this parent key of `keySet` to emit error
+ *               information.
+ * @param filename This parameter stores the path of the YAML file this
+ *                 function converts.
+ *
+ * @retval -2 if the file could not be opened for reading
+ * @retval -1 if there was an syntax error converting the YAML file
+ * @retval  0 if parsing was successful and the function did not change the
+ *            given keyset
+ * @retval  1 if parsing was successful and the function did change `keySet`
+ */
 int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   const char *grammar = "\n"
                         "TERM\n"
