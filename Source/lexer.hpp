@@ -9,6 +9,7 @@
 #ifndef ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 #define ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 
+/** This class implements a basic lexer for the serialization format YAML. */
 class Lexer {
   /** This variable specifies if the parser found the end of the input. */
   bool end = false;
