@@ -1,11 +1,20 @@
+// -- Imports ------------------------------------------------------------------
+
 #include <stdlib.h>
 
-#include "converter.hpp"
+#include <kdb.hpp>
+
+#include "convert.hpp"
+
+using ckdb::keyNew;
+using kdb::Key;
+using kdb::KeySet;
+
+// -- Main ---------------------------------------------------------------------
 
 int main() {
-  Converter converter;
+  KeySet keys;
+  Key parent{keyNew("user", KEY_END, "", KEY_VALUE)};
 
-  converter.parse();
-
-  return EXIT_SUCCESS;
+  return addToKeySet(keys, parent, "");
 }

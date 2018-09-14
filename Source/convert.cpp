@@ -1,11 +1,10 @@
 // -- Imports ------------------------------------------------------------------
 
 #include <iostream>
-#include <stdlib.h>
 
 #include <yaep.h>
 
-#include "converter.hpp"
+#include "convert.hpp"
 #include "error_listener.hpp"
 #include "lexer.hpp"
 #include "memory.hpp"
@@ -15,6 +14,9 @@ using std::cerr;
 using std::cout;
 using std::endl;
 using std::string;
+
+using CppKey = kdb::Key;
+using CppKeySet = kdb::KeySet;
 
 // -- Globals ------------------------------------------------------------------
 
@@ -36,9 +38,13 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
 
 void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
-// -- Class --------------------------------------------------------------------
+int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
+  const char *grammar = "\n"
+                        "TERM\n"
+                        "NUMBER = 49;\n"
+                        "START : NUMBER # 0\n"
+                        "      ;\n";
 
-int Converter::parse() {
   yaep parser;
   struct yaep_tree_node *root = NULL;
   int ambiguousInput;
@@ -66,5 +72,5 @@ int Converter::parse() {
   Walker walker;
   walker.walk(root);
 
-  return EXIT_SUCCESS;
+  return 0;
 }

@@ -38,8 +38,8 @@ find_package(YAEP REQUIRED)
 set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/lexer.hpp
     ${SOURCE_DIRECTORY}/lexer.cpp
-    ${SOURCE_DIRECTORY}/converter.hpp
-    ${SOURCE_DIRECTORY}/converter.cpp
+    ${SOURCE_DIRECTORY}/convert.hpp
+    ${SOURCE_DIRECTORY}/convert.cpp
     ${SOURCE_DIRECTORY}/yawn.cpp
     ${SOURCE_DIRECTORY}/memory.hpp
     ${SOURCE_DIRECTORY}/error_listener.hpp
