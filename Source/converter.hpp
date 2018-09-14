@@ -62,8 +62,8 @@ public:
       return EXIT_FAILURE;
     }
 
-    cout << "Type of top node: " << toString(root) << endl;
-    cout << "Code of top node: " << (root->val).term.code << endl;
+    Walker walker;
+    walker.walk(root);
 
     return EXIT_SUCCESS;
   }
