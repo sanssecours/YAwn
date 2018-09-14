@@ -32,6 +32,7 @@ before_install:
         export CC=/usr/local/opt/llvm/bin/clang
         export CXX=/usr/local/opt/llvm/bin/clang++
       fi
+      brew install elektra
       brew install ninja
     fi
 
