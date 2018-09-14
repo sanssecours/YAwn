@@ -23,7 +23,7 @@ public:
                    void *ignoredTokenData __attribute__((unused)),
                    int recoveredToken,
                    void *recoveredTokenData __attribute__((unused))) {
-    std::cerr << "Syntax error on token number" << errorToken << "”"
+    std::cerr << "Syntax error on token number " << errorToken << "”"
               << std::endl;
     if (ignoredToken > 0) {
       std::cerr << "Ignoring " << (recoveredToken - ignoredToken)
