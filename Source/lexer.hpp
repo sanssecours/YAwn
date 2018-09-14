@@ -9,12 +9,25 @@
 #ifndef ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 #define ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 
+// -- Imports ------------------------------------------------------------------
+
+#include <fstream>
+
+// -- Class --------------------------------------------------------------------
+
 /** This class implements a basic lexer for the serialization format YAML. */
 class Lexer {
   /** This variable specifies if the parser found the end of the input. */
   bool end = false;
 
 public:
+  /**
+   * @brief This constructor initializes a lexer with the given input.
+   *
+   * @param stream This stream specifies the text which this lexer analyzes.
+   */
+  Lexer(std::ifstream &stream);
+
   /**
    * @brief This method returns the number of the next token produced by the
    *        lexer.

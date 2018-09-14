@@ -16,7 +16,7 @@ lint: run
 
 run: compile
 	@printf '🚗 Run\n\n'
-	@$(BUILD_DIRECTORY)/$(PROGRAM)
+	@$(BUILD_DIRECTORY)/$(PROGRAM) $(INPUT_DIRECTORY)/Null.yaml
 
 test: compile
 	@printf '🐛 Test\n\n'

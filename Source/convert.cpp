@@ -1,5 +1,7 @@
 // -- Imports ------------------------------------------------------------------
 
+#include <cstdio>
+#include <fstream>
 #include <iostream>
 
 #include <yaep.h>
@@ -13,6 +15,7 @@
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::ifstream;
 using std::string;
 
 using CppKey = kdb::Key;
@@ -73,7 +76,13 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   ErrorListener errorListener;
   errorListenerAdress = &errorListener;
 
-  Lexer lexer;
+  ifstream input{filename};
+  if (!input.good()) {
+    perror(string("Unable to open file “" + filename + "”").c_str());
+    return -2;
+  }
+
+  Lexer lexer{input};
   lexerAddress = &lexer;
 
   int ambiguousInput;

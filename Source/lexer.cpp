@@ -10,7 +10,16 @@
 
 #include "lexer.hpp"
 
+using std::ifstream;
+
 // -- Class --------------------------------------------------------------------
+
+/**
+ * @brief This constructor initializes a lexer with the given input.
+ *
+ * @param stream This stream specifies the text which this lexer analyzes.
+ */
+Lexer::Lexer(ifstream &stream __attribute__((unused))) {}
 
 /**
  * @brief This method returns the number of the next token produced by the
