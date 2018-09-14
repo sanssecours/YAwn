@@ -21,6 +21,8 @@ set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 find_package(YAEP REQUIRED)
 
 set(SOURCE_FILES
+    ${SOURCE_DIRECTORY}/lexer.hpp
+    ${SOURCE_DIRECTORY}/lexer.cpp
     ${SOURCE_DIRECTORY}/yawn.cpp
     ${SOURCE_DIRECTORY}/memory.hpp
     ${SOURCE_DIRECTORY}/error_listener.hpp

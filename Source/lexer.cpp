@@ -6,6 +6,10 @@
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
 
+// -- Imports ------------------------------------------------------------------
+
+#include "lexer.hpp"
+
 // -- Class --------------------------------------------------------------------
 
 /**
@@ -19,13 +23,12 @@
  *
  * @return The number of the first token the parser has not emitted yet.
  */
-int Lexer::nextToken(void **attribute);
-{
+int Lexer::nextToken(void **attribute) {
   if (end) {
     return -1;
   }
 
-  *attribute = NULL;
+  *attribute = nullptr;
   end = true;
   return '1';
 }

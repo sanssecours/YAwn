@@ -25,15 +25,7 @@ public:
    *
    * @return The number of the first token the parser has not emitted yet.
    */
-  int nextToken(void **attribute) {
-    if (end) {
-      return -1;
-    }
-
-    *attribute = NULL;
-    end = true;
-    return '1';
-  }
+  int nextToken(void **attribute);
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_LEXER_HPP
