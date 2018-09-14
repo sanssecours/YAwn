@@ -31,12 +31,6 @@ void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
 class Converter {
 
-  /* All parser allocated memory is contained here. */
-  os_t parseTreeMemory;
-
-  /* The following variable stores the index of next input token. */
-  int token;
-
   const char *grammar = "\n"
                         "TERM\n"
                         "NUMBER = 49;\n"
@@ -64,8 +58,6 @@ public:
     yaep parser;
     struct yaep_tree_node *root = NULL;
     int ambiguousInput;
-
-    token = 0;
 
     if (parser.parse_grammar(1, grammar) != 0) {
       cerr << "Unable to parse grammar:" << parser.error_message() << endl;
