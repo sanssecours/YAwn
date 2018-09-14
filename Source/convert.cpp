@@ -62,9 +62,6 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
                         "      ;\n";
 
   yaep parser;
-  struct yaep_tree_node *root = NULL;
-  int ambiguousInput;
-
   if (parser.parse_grammar(1, grammar) != 0) {
     cerr << "Unable to parse grammar:" << parser.error_message() << endl;
     return EXIT_FAILURE;
@@ -78,6 +75,9 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
 
   Lexer lexer;
   lexerAddress = &lexer;
+
+  int ambiguousInput;
+  struct yaep_tree_node *root = NULL;
 
   if (parser.parse(nextToken, syntaxError, alloc, NULL, &root,
                    &ambiguousInput)) {
