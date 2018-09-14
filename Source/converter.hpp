@@ -1,7 +1,5 @@
-#include <functional>
 #include <iostream>
 
-#include "objstack.h"
 #include <yaep.h>
 
 #include "error_listener.hpp"
