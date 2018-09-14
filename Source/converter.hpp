@@ -1,3 +1,6 @@
+#ifndef ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
+#define ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
+
 /**
  * @file
  *
@@ -18,3 +21,5 @@ class Converter {
 public:
   int parse();
 };
+
+#endif // ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
