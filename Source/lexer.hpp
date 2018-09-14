@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * @brief This file contains a basic YAML lexer.
+ * @brief This file contains definitions for a basic YAML lexer.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
