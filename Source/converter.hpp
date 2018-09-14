@@ -5,6 +5,7 @@
 #include "error_listener.hpp"
 #include "lexer.hpp"
 #include "memory.hpp"
+#include "walker.hpp"
 
 using std::cerr;
 using std::cout;
@@ -34,22 +35,6 @@ class Converter {
                         "NUMBER = 49;\n"
                         "START : NUMBER # 0\n"
                         "      ;\n";
-
-  static string toString(yaep_tree_node *node) {
-    switch (node->type) {
-    case yaep_tree_node_type::YAEP_NIL:
-      return "Nil";
-    case yaep_tree_node_type::YAEP_ERROR:
-      return "Error";
-    case yaep_tree_node_type::YAEP_TERM:
-      return "Terminal";
-    case yaep_tree_node_type::YAEP_ANODE:
-      return "Abstract Node";
-    case yaep_tree_node_type::YAEP_ALT:
-      return "Alternative";
-    }
-    return "Unknown";
-  }
 
 public:
   int parse() {
