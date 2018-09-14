@@ -11,6 +11,7 @@
 
 // -- Class --------------------------------------------------------------------
 
+/** This class provides methods to convert YAML data to a key set. */
 class Converter {
   const char *grammar = "\n"
                         "TERM\n"
@@ -19,6 +20,9 @@ class Converter {
                         "      ;\n";
 
 public:
+  /**
+   * This function converts YAML data to a key set.
+   */
   int parse();
 };
 
