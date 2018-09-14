@@ -29,6 +29,17 @@ static Memory *parserMemoryAddress;
 
 // -- Functions ----------------------------------------------------------------
 
+/**
+ * @brief This method returns the number of the next token produced by the
+ *        lexer.
+ *
+ * If the lexer found the end of the input, then this function returns `-1`.
+ *
+ * @param attribute The parser uses this parameter to store auxiliary data for
+ *                  the returned token.
+ *
+ * @return The number of the first token the parser has not emitted yet.
+ */
 int nextToken(void **attribute) { return lexerAddress->nextToken(attribute); }
 
 void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
