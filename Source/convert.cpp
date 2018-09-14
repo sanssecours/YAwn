@@ -82,7 +82,7 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   if (parser.parse(nextToken, syntaxError, alloc, NULL, &root,
                    &ambiguousInput)) {
     cerr << "Unable to parse input: " << parser.error_message() << endl;
-    return EXIT_FAILURE;
+    return -1;
   }
 
   Walker walker;
