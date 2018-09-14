@@ -37,11 +37,11 @@ class Converter {
   /* The following variable stores the index of next input token. */
   int token;
 
-  const char *description = "\n"
-                            "TERM\n"
-                            "NUMBER = 49;\n"
-                            "START : NUMBER # 0\n"
-                            "      ;\n";
+  const char *grammar = "\n"
+                        "TERM\n"
+                        "NUMBER = 49;\n"
+                        "START : NUMBER # 0\n"
+                        "      ;\n";
 
   static string toString(yaep_tree_node *node) {
     switch (node->type) {
@@ -67,7 +67,7 @@ public:
 
     token = 0;
 
-    if (parser.parse_grammar(1, description) != 0) {
+    if (parser.parse_grammar(1, grammar) != 0) {
       cerr << "Unable to parse grammar:" << parser.error_message() << endl;
       return EXIT_FAILURE;
     }
