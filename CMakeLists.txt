@@ -42,6 +42,7 @@ set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/convert.cpp
     ${SOURCE_DIRECTORY}/yawn.cpp
     ${SOURCE_DIRECTORY}/memory.hpp
+    ${SOURCE_DIRECTORY}/memory.cpp
     ${SOURCE_DIRECTORY}/error_listener.hpp
     ${SOURCE_DIRECTORY}/walker.hpp
     ${SOURCE_DIRECTORY}/objstack.h)
