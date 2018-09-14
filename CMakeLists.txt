@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
-
 set(CMAKE_CXX_STANDARD 11)
+
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -18,7 +18,22 @@ endif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 
 set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 
+# ===========
+# = Elektra =
+# ===========
+
+find_package(Elektra REQUIRED)
+include_directories(${ELEKTRA_INCLUDE_DIR})
+
+# ========
+# = YAEP =
+# ========
+
 find_package(YAEP REQUIRED)
+
+# ========
+# = YAwn =
+# ========
 
 set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/lexer.hpp
@@ -33,4 +48,4 @@ set(SOURCE_FILES
 
 include_directories("${YAEP_INCLUDE_DIRS}")
 add_executable(yawn ${SOURCE_FILES})
-target_link_libraries(yawn yaep++)
+target_link_libraries(yawn elektra yaep++)
