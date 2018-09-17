@@ -19,7 +19,7 @@ using std::ifstream;
  *
  * @param stream This stream specifies the text which this lexer analyzes.
  */
-Lexer::Lexer(ifstream &stream __attribute__((unused))) {}
+Lexer::Lexer(ifstream &stream) : input{stream} {}
 
 /**
  * @brief This method returns the number of the next token produced by the

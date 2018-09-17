@@ -13,12 +13,17 @@
 
 #include <fstream>
 
+#include "input.hpp"
+
 // -- Class --------------------------------------------------------------------
 
 /** This class implements a basic lexer for the serialization format YAML. */
 class Lexer {
   /** This variable specifies if the parser found the end of the input. */
   bool end = false;
+
+  /** This attribute represents the input the lexer tokenizes. */
+  Input input;
 
 public:
   /**
