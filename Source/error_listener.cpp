@@ -19,6 +19,8 @@
 
 using std::cerr;
 using std::endl;
+using std::string;
+using std::to_string;
 
 // -- Class --------------------------------------------------------------------
 
@@ -42,10 +44,17 @@ void ErrorListener::syntaxError(
     int errorToken, void *errorTokenData __attribute__((unused)),
     int ignoredToken, void *ignoredTokenData __attribute__((unused)),
     int recoveredToken, void *recoveredTokenData __attribute__((unused))) {
-  cerr << "Syntax error on token number " << errorToken << "”" << endl;
+  message = "Syntax error on token number " + to_string(errorToken) + "”\n";
   if (ignoredToken > 0) {
-    cerr << "Ignoring " << (recoveredToken - ignoredToken)
-         << " tokens starting with token number " << ignoredToken << "”"
-         << endl;
+    message += "Ignoring " + to_string(recoveredToken - ignoredToken) +
+               " tokens starting with token number " + to_string(ignoredToken) +
+               "”\n";
   }
 }
+
+/**
+ * @brief This method returns a description of the last syntax error.
+ *
+ * @return A text describing the last error
+ */
+string ErrorListener::getErrorMessage() { return message; }

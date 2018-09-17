@@ -18,6 +18,9 @@
 // -- Class --------------------------------------------------------------------
 
 class ErrorListener {
+  /** This variable stores the last error message produced by the parser. */
+  std::string message;
+
 public:
   /**
    * @brief This method reacts to syntax errors reported by YAEP’s parsing
@@ -38,6 +41,13 @@ public:
   void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
                    void *ignoredTokenData, int recoveredToken,
                    void *recoveredTokenData);
+
+  /**
+   * @brief This method returns a description of the last syntax error.
+   *
+   * @return A text describing the last error
+   */
+  std::string getErrorMessage();
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_ERROR_LISTENER_HPP
