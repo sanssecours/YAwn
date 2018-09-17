@@ -23,15 +23,15 @@ using std::stringstream;
 using CppKey = kdb::Key;
 using CppKeySet = kdb::KeySet;
 
+namespace {
+
 // -- Globals ------------------------------------------------------------------
 
-static ErrorListener *errorListenerAdress;
-static Lexer *lexerAddress;
-static Memory *parserMemoryAddress;
+ErrorListener *errorListenerAdress;
+Lexer *lexerAddress;
+Memory *parserMemoryAddress;
 
 // -- Functions ----------------------------------------------------------------
-
-namespace {
 
 /**
  * @brief This method returns the number of the next token produced by the
