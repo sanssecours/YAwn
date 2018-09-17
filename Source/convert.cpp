@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include <yaep.h>
 
@@ -13,9 +14,11 @@
 #include "walker.hpp"
 
 using std::cerr;
+using std::cout;
 using std::endl;
 using std::ifstream;
 using std::string;
+using std::stringstream;
 
 using CppKey = kdb::Key;
 using CppKeySet = kdb::KeySet;
@@ -66,6 +69,24 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
 }
 
 /**
+ * @brief This function reads the content of a given grammar file.
+ *
+ * @param filename This variables stores the location of the grammar file.
+ *
+ * @return The content of the given grammar file
+ */
+string readGrammar(string const &filename) {
+  ifstream grammar{filename};
+  if (!grammar.good()) {
+    throw ifstream::failure("Unable to open grammar file “" + filename +
+                            "”: " + strerror(errno));
+  }
+  stringstream stringStream;
+  stringStream << grammar.rdbuf();
+  return stringStream.str();
+}
+
+/**
  * This method allocates a memory region of the given size.
  *
  * @param size This variable specifies the amount of data this method should
@@ -94,14 +115,13 @@ void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 int addToKeySet(CppKeySet &keySet __attribute__((unused)),
                 CppKey &parent __attribute__((unused)),
                 string const &filename) {
-  const char *grammar = "\n"
-                        "TERM\n"
-                        "NUMBER = 49;\n"
-                        "START : NUMBER # 0\n"
-                        "      ;\n";
+  auto grammar = readGrammar("Grammar/yaml.bnf");
+
+  cout << "— Grammar ————\n\n";
+  cout << grammar << endl;
 
   yaep parser;
-  if (parser.parse_grammar(1, grammar) != 0) {
+  if (parser.parse_grammar(1, grammar.c_str()) != 0) {
     cerr << "Unable to parse grammar:" << parser.error_message() << endl;
     return EXIT_FAILURE;
   }

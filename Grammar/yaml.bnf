@@ -1,0 +1,4 @@
+TERM
+NUMBER = 49;
+START : NUMBER # 0
+      ;
