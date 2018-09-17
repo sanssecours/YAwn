@@ -44,6 +44,7 @@ before_script:
 
 script:
   - ninja -C Build
+  - Build/yawn Input/Null.yaml
   - >
      oclint -p Build
      -no-analytics
