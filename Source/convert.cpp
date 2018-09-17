@@ -42,6 +42,22 @@ static Memory *parserMemoryAddress;
  */
 int nextToken(void **attribute) { return lexerAddress->nextToken(attribute); }
 
+/**
+ * @brief This method reacts to syntax errors reported by YAEP’s parsing
+ *        engine.
+ *
+ * @param errorToken This number specifies the token where the error occurred.
+ * @param errorTokenData This variable stores the data contained in
+ *                       `errorToken`.
+ * @param ignoredToken This number specifies the first token that was ignored
+ *                     during error recovery.
+ * @param ignoredTokenData This variable stores the data contained in
+ *                         `ignoredToken`.
+ * @param recoveredToken This number specifies the first included token after
+ *                       the error recovery has taken place.
+ * @param recoveredTokenData This variable stores the data contained in
+ *                           `recoveredToken`.
+ */
 void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
                  void *ignoredTokenData, int recoveredToken,
                  void *recoveredTokenData) {
@@ -50,6 +66,14 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
                                           recoveredToken, recoveredTokenData);
 }
 
+/**
+ * This method allocates a memory region of the given size.
+ *
+ * @param size This variable specifies the amount of data this method should
+ *             allocate.
+ *
+ * @return A pointer to a memory region of the specified size
+ */
 void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
 /**
