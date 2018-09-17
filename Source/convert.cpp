@@ -31,6 +31,8 @@ static Memory *parserMemoryAddress;
 
 // -- Functions ----------------------------------------------------------------
 
+namespace {
+
 /**
  * @brief This method returns the number of the next token produced by the
  *        lexer.
@@ -95,6 +97,8 @@ string readGrammar(string const &filename) {
   stringStream << grammar.rdbuf();
   return stringStream.str();
 }
+
+} // namespace
 
 /**
  * @brief This function converts the given YAML file to keys and adds the
