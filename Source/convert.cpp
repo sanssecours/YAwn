@@ -149,7 +149,8 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
 
   if (parser.parse(nextToken, syntaxError, alloc, NULL, &root,
                    &ambiguousInput)) {
-    cerr << "Unable to parse input: " << parser.error_message() << endl;
+    cerr << "Unable to parse input: " << errorListener.getErrorMessage()
+         << endl;
     return -1;
   }
 
