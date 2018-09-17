@@ -3,10 +3,7 @@
  *
  * @brief This file implements an error listener for the YAML parser.
  *
- * About 50 percent of this code was copied from YAEP’s test suite.
- *
- * @copyright GPL License
- *            (see https://github.com/vnmakarov/yaep/blob/master/copyright)
+ * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
 
 // -- Imports ------------------------------------------------------------------
