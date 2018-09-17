@@ -68,7 +68,9 @@ void *alloc(int size) { return parserMemoryAddress->allocate(size); }
  *            given keyset
  * @retval  1 if parsing was successful and the function did change `keySet`
  */
-int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
+int addToKeySet(CppKeySet &keySet __attribute__((unused)),
+                CppKey &parent __attribute__((unused)),
+                string const &filename) {
   const char *grammar = "\n"
                         "TERM\n"
                         "NUMBER = 49;\n"
