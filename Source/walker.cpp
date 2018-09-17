@@ -15,6 +15,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::to_string;
 
 // -- Functions ----------------------------------------------------------------
 
@@ -27,19 +28,24 @@ namespace {
  *              a string.
  */
 string toString(yaep_tree_node const *node) {
+  string representation;
+
   switch (node->type) {
   case yaep_tree_node_type::YAEP_NIL:
-    return "Nil";
+    return "<Nil>";
   case yaep_tree_node_type::YAEP_ERROR:
-    return "Error";
+    return "<Error>";
   case yaep_tree_node_type::YAEP_TERM:
-    return "Terminal";
+    return "<Terminal, " + to_string(node->val.term.code) + ">";
   case yaep_tree_node_type::YAEP_ANODE:
-    return "Abstract Node";
+    representation = string("<Abstract Node, ") + node->val.anode.name + ", " +
+                     to_string(node->val.anode.cost) + ">";
+    break;
   case yaep_tree_node_type::YAEP_ALT:
-    return "Alternative";
+    representation = "<Alternative>";
+    break;
   }
-  return "Unknown";
+  return representation;
 }
 
 } // namespace
@@ -52,6 +58,7 @@ string toString(yaep_tree_node const *node) {
  * @param root This variable stores the root of the tree this function visits.
  */
 void Walker::walk(yaep_tree_node const *root) {
-  cout << "Type of top node: " << toString(root) << endl;
-  cout << "Code of top node: " << (root->val).term.code << endl;
+  cout << "— Walk Tree —\n\n";
+  cout << toString(root);
+  cout << endl;
 }
