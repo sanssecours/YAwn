@@ -69,6 +69,16 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
 }
 
 /**
+ * This method allocates a memory region of the given size.
+ *
+ * @param size This variable specifies the amount of data this method should
+ *             allocate.
+ *
+ * @return A pointer to a memory region of the specified size
+ */
+void *alloc(int size) { return parserMemoryAddress->allocate(size); }
+
+/**
  * @brief This function reads the content of a given grammar file.
  *
  * @param filename This variables stores the location of the grammar file.
@@ -85,16 +95,6 @@ string readGrammar(string const &filename) {
   stringStream << grammar.rdbuf();
   return stringStream.str();
 }
-
-/**
- * This method allocates a memory region of the given size.
- *
- * @param size This variable specifies the amount of data this method should
- *             allocate.
- *
- * @return A pointer to a memory region of the specified size
- */
-void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
 /**
  * @brief This function converts the given YAML file to keys and adds the
