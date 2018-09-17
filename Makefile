@@ -7,7 +7,7 @@ export PROGRAM := yawn
 
 .PHONY: clean compile
 
-all: run
+all: lint
 
 lint: run
 	@printf '\n✨ Lint\n'
