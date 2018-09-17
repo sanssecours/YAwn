@@ -28,8 +28,6 @@ namespace {
  *              a string.
  */
 string toString(yaep_tree_node const *node) {
-  string representation;
-
   switch (node->type) {
   case yaep_tree_node_type::YAEP_NIL:
     return "<Nil>";
@@ -37,14 +35,21 @@ string toString(yaep_tree_node const *node) {
     return "<Error>";
   case yaep_tree_node_type::YAEP_TERM:
     return "<Terminal, " + to_string(node->val.term.code) + ">";
-  case yaep_tree_node_type::YAEP_ANODE:
-    representation = string("<Abstract Node, ") + node->val.anode.name + ", " +
-                     to_string(node->val.anode.cost) + ">";
-    break;
   case yaep_tree_node_type::YAEP_ALT:
-    representation = "<Alternative>";
+    return "<Alternative>";
+  default:
     break;
   }
+  // Node is abstract
+  yaep_anode anode = node->val.anode;
+  string representation = string("<Abstract Node, ") + anode.name + ", " +
+                          to_string(anode.cost) + ">";
+  yaep_tree_node **child = anode.children;
+
+  while (child) {
+    representation += toString(*child);
+  }
+
   return representation;
 }
 
