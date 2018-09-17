@@ -44,6 +44,7 @@ set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/memory.hpp
     ${SOURCE_DIRECTORY}/memory.cpp
     ${SOURCE_DIRECTORY}/error_listener.hpp
+    ${SOURCE_DIRECTORY}/error_listener.cpp
     ${SOURCE_DIRECTORY}/walker.hpp
     ${SOURCE_DIRECTORY}/objstack.h)
 
