@@ -116,8 +116,7 @@ string readGrammar(string const &filename) {
  *            given keyset
  * @retval  1 if parsing was successful and the function did change `keySet`
  */
-int addToKeySet(CppKeySet &keySet __attribute__((unused)),
-                CppKey &parent __attribute__((unused)),
+int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
                 string const &filename) {
   auto grammar = readGrammar("Grammar/yaml.bnf");
 
@@ -155,7 +154,7 @@ int addToKeySet(CppKeySet &keySet __attribute__((unused)),
   }
 
   Walker walker;
-  walker.walk(root);
+  keySet.append(walker.walk(root));
 
   return 0;
 }
