@@ -27,6 +27,10 @@ class Token {
   std::string _text;
 
 public:
+  /** This token type starts the YAML stream. */
+  static const int STREAM_START = 1;
+  /** This token type ends the YAML stream. */
+  static const int STREAM_END = 2;
   /** This token type specifies that the token stores a plain scalar. */
   static const int PLAIN_SCALAR = 3;
 
