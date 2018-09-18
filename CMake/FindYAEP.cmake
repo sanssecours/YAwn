@@ -14,7 +14,7 @@
 
 find_path(YAEP_INCLUDE_DIR NAMES yaep.h)
 
-find_library(YAEP_LIBRARY NAMES YAEP)
+find_library(YAEP_LIBRARY NAMES yaep++)
 
 include(FindPackageHandleStandardArgs)
 # Handle the QUIETLY and REQUIRED arguments and set YAEP_FOUND to TRUE, if all
