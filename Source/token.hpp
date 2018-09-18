@@ -20,17 +20,35 @@
 
 class Token {
 
+  /** This attribute stores a number representing the kind of the token. */
+  int _type;
+
   /** This variable stores the content stored inside the token. */
-  std::string text;
+  std::string _text;
 
 public:
   /**
-   * @brief This constructor creates a Token from the given arguments.
+   * @brief This constructor creates a token from the given arguments.
    *
-   * @param content This variable specifies the content that should be stored
-   *                in the token.
+   * @param type This number specifies the type of the token.
+   * @param text This variable specifies the content that should be stored
+   *             in the token.
    */
-  Token(std::string const &content);
+  Token(int const type, std::string const &text);
+
+  /**
+   * @brief This method returns the type of the token.
+   *
+   * @return A number specifying the type of this token
+   */
+  int getType();
+
+  /**
+   * @brief This method returns the content of the token.
+   *
+   * @return The text stored inside this token
+   */
+  std::string getText();
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_TOKEN_HPP
