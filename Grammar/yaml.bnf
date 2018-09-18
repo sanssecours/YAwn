@@ -1,5 +1,5 @@
 TERM
-SCALAR = 49;
+PLAIN_SCALAR = 3;
 
-yaml : SCALAR # 0
+yaml : PLAIN_SCALAR # 0
      ;
