@@ -67,4 +67,4 @@ set(SOURCE_FILES
 
 include_directories("${YAEP_INCLUDE_DIRS}")
 add_executable(yawn ${SOURCE_FILES})
-target_link_libraries(yawn elektra yaep++)
+target_link_libraries(yawn elektra ${YAEP_LIBRARIES})
