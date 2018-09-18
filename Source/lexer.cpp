@@ -19,7 +19,9 @@ using std::ifstream;
  *
  * @param stream This stream specifies the text which this lexer analyzes.
  */
-Lexer::Lexer(ifstream &stream) : input{stream} {}
+Lexer::Lexer(ifstream &stream) : input{stream} {
+  tokens.push_back(Token('1', "Hello World"));
+}
 
 /**
  * @brief This method returns the number of the next token produced by the
@@ -33,11 +35,12 @@ Lexer::Lexer(ifstream &stream) : input{stream} {}
  * @return The number of the first token the parser has not emitted yet.
  */
 int Lexer::nextToken(void **attribute) {
-  if (end) {
-    return -1;
+  if (tokens.size() <= 0) {
+    tokens.push_front(Token(-1, "EOF"));
   }
 
-  *attribute = nullptr;
-  end = true;
-  return '1';
+  *attribute = &tokens.front();
+  int kind = tokens.front().getType();
+  tokens.pop_front();
+  return kind;
 }
