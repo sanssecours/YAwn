@@ -3,7 +3,7 @@ STREAM_START = 1
 STREAM_END = 2
 PLAIN_SCALAR = 3;
 
-yaml : node # 0
+yaml : STREAM_START node STREAM_END # yaml (1)
      ;
 
 node : PLAIN_SCALAR # 0
