@@ -27,6 +27,9 @@ class Token {
   std::string _text;
 
 public:
+  /** This token type specifies that the token stores a plain scalar. */
+  static const int PLAIN_SCALAR = 49;
+
   /**
    * @brief This constructor creates a token from the given arguments.
    *
