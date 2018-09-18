@@ -45,7 +45,7 @@ void ErrorListener::syntaxError(int errorTokenNumber, void *errorTokenData,
                                 int recoveredToken,
                                 void *recoveredTokenData
                                 __attribute__((unused))) {
-
+  errors++;
   Token *errorToken = static_cast<Token *>(errorTokenData);
 
   message = "Syntax error on token number " + to_string(errorTokenNumber) +
@@ -63,3 +63,10 @@ void ErrorListener::syntaxError(int errorTokenNumber, void *errorTokenData,
  * @return A text describing the last error
  */
 string ErrorListener::getErrorMessage() { return message; }
+
+/**
+ * @brief This method returns the number of syntax errors reported by YAEP.
+ *
+ * @return The number of syntax errors found in the parsed input
+ */
+size_t ErrorListener::getNumberOfErrors() { return errors; }
