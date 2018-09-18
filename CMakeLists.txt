@@ -38,6 +38,8 @@ find_package(YAEP REQUIRED)
 set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/input.hpp
     ${SOURCE_DIRECTORY}/input.cpp
+    ${SOURCE_DIRECTORY}/token.hpp
+    ${SOURCE_DIRECTORY}/token.cpp
     ${SOURCE_DIRECTORY}/lexer.hpp
     ${SOURCE_DIRECTORY}/lexer.cpp
     ${SOURCE_DIRECTORY}/convert.hpp
