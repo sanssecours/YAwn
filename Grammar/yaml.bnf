@@ -1,5 +1,10 @@
 TERM
+STREAM_START = 1
+STREAM_END = 2
 PLAIN_SCALAR = 3;
 
-yaml : PLAIN_SCALAR # 0
+yaml : node # 0
+     ;
+
+node : PLAIN_SCALAR # 0
      ;
