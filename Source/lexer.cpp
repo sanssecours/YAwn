@@ -20,7 +20,7 @@ using std::ifstream;
  * @param stream This stream specifies the text which this lexer analyzes.
  */
 Lexer::Lexer(ifstream &stream) : input{stream} {
-  tokens.push_back(Token('1', "Hello World"));
+  tokens.push_back(Token(Token::PLAIN_SCALAR, "Hello World"));
 }
 
 /**
