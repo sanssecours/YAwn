@@ -13,6 +13,7 @@
 #include <yaep.h>
 
 #include "error_listener.hpp"
+#include "token.hpp"
 
 using std::cerr;
 using std::endl;
@@ -25,7 +26,8 @@ using std::to_string;
  * @brief This method reacts to syntax errors reported by YAEP’s parsing
  *        engine.
  *
- * @param errorToken This number specifies the token where the error occurred.
+ * @param errorTokenNumber This number specifies the token where the error
+ *                         occurred.
  * @param errorTokenData This variable stores the data contained in
  *                       `errorToken`.
  * @param ignoredToken This number specifies the first token that was ignored
@@ -37,11 +39,17 @@ using std::to_string;
  * @param recoveredTokenData This variable stores the data contained in
  *                           `recoveredToken`.
  */
-void ErrorListener::syntaxError(
-    int errorToken, void *errorTokenData __attribute__((unused)),
-    int ignoredToken, void *ignoredTokenData __attribute__((unused)),
-    int recoveredToken, void *recoveredTokenData __attribute__((unused))) {
-  message = "Syntax error on token number " + to_string(errorToken) + "”\n";
+void ErrorListener::syntaxError(int errorTokenNumber, void *errorTokenData,
+                                int ignoredToken,
+                                void *ignoredTokenData __attribute__((unused)),
+                                int recoveredToken,
+                                void *recoveredTokenData
+                                __attribute__((unused))) {
+
+  Token *errorToken = static_cast<Token *>(errorTokenData);
+
+  message = "Syntax error on token number " + to_string(errorTokenNumber) +
+            ": “" + errorToken->getText() + "”\n";
   if (ignoredToken > 0) {
     message += "Ignoring " + to_string(recoveredToken - ignoredToken) +
                " tokens starting with token number " + to_string(ignoredToken) +

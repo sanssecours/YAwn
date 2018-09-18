@@ -24,7 +24,8 @@ public:
    * @brief This method reacts to syntax errors reported by YAEP’s parsing
    *        engine.
    *
-   * @param errorToken This number specifies the token where the error occurred.
+   * @param errorTokenNumber This number specifies the token where the error
+   *                         occurred.
    * @param errorTokenData This variable stores the data contained in
    *                       `errorToken`.
    * @param ignoredToken This number specifies the first token that was ignored
