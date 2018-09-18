@@ -28,28 +28,28 @@ namespace {
  * @param node This argument stores the tree node that this function converts to
  *              a string.
  */
-string toString(yaep_tree_node const *node) {
+string toString(yaep_tree_node const *node, string const indent = "") {
   switch (node->type) {
   case yaep_tree_node_type::YAEP_NIL:
-    return "<Nil>";
+    return indent + "<Nil>";
   case yaep_tree_node_type::YAEP_ERROR:
-    return "<Error>";
+    return indent + "<Error>";
   case yaep_tree_node_type::YAEP_TERM:
-    return "<Terminal, " + to_string(node->val.term.code) + ", " +
+    return indent + "<Terminal, " + to_string(node->val.term.code) + ", " +
            static_cast<Token *>(node->val.term.attr)->getText() + ">";
   case yaep_tree_node_type::YAEP_ALT:
-    return "<Alternative>";
+    return indent + "<Alternative>";
   default:
     break;
   }
   // Node is abstract
   yaep_anode anode = node->val.anode;
-  string representation = string("<Abstract Node, ") + anode.name + ", " +
-                          to_string(anode.cost) + ">";
+  string representation = indent + string("<Abstract Node, ") + anode.name +
+                          ", " + to_string(anode.cost) + ">";
   yaep_tree_node **children = anode.children;
 
   for (size_t child = 0; children[child]; child++) {
-    representation += "\n" + toString(children[child]);
+    representation += "\n" + toString(children[child], indent + "  ");
   }
 
   return representation;
