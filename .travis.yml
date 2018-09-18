@@ -16,9 +16,23 @@ matrix:
       env:
         - CXXFLAGS=-Werror
 
+    - os: linux
+      name: 🐧 GCC
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - CC_COMPILER=gcc-8
+        - CXX_COMPILER=g++-8
+        - CXXFLAGS=-Werror
+
 before_install:
   - git clone https://github.com/vnmakarov/yaep.git
-  - cd yaep && ./configure && make -C src install && cd ..
+  - cd yaep && ./configure && sudo make -C src install && cd ..
   - |
     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       if [[ "$CC" == "gcc" ]]; then
@@ -34,6 +48,19 @@ before_install:
       fi
       brew install elektra
       brew install ninja
+    fi
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      [[ -n "$CC_COMPILER" ]] && export CC="$CC_COMPILER"
+      [[ -n "$CXX_COMPILER" ]] && export CXX="$CXX_COMPILER"
+      sudo apt-get install ninja-build
+      git clone https://github.com/ElektraInitiative/libelektra.git
+      cd libelektra && \
+         mkdir Build && \
+         cd Build && \
+         cmake -GNinja -DCOMMON_FLAGS=-Wno-error .. && \
+         sudo ninja install && \
+         cd ../..
     fi
 
 before_script:
