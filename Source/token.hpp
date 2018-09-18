@@ -23,6 +23,13 @@ class Token {
   /** This variable stores the content stored inside the token. */
   std::string text;
 
+public:
+  /**
+   * @brief This constructor creates a Token from the given arguments.
+   *
+   * @param content This variable specifies the content that should be stored
+   *                in the token.
+   */
   Token(std::string const &content);
 };
 
