@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+#include "token.hpp"
 #include "walker.hpp"
 
 using std::cout;
@@ -34,7 +35,8 @@ string toString(yaep_tree_node const *node) {
   case yaep_tree_node_type::YAEP_ERROR:
     return "<Error>";
   case yaep_tree_node_type::YAEP_TERM:
-    return "<Terminal, " + to_string(node->val.term.code) + ">";
+    return "<Terminal, " + to_string(node->val.term.code) + ", " +
+           static_cast<Token *>(node->val.term.attr)->getText() + ">";
   case yaep_tree_node_type::YAEP_ALT:
     return "<Alternative>";
   default:
