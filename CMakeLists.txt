@@ -38,6 +38,9 @@ find_package(YAEP REQUIRED)
 set(SOURCES_INPUT ${SOURCE_DIRECTORY}/input.hpp ${SOURCE_DIRECTORY}/input.cpp)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
+  # Work around error “unrecognized option '--push-state'”
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+
   set_source_files_properties(${SOURCES_INPUT}
                               PROPERTIES
                               COMPILE_FLAGS
