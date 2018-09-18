@@ -11,9 +11,11 @@
 
 // -- Imports ------------------------------------------------------------------
 
+#include <deque>
 #include <fstream>
 
 #include "input.hpp"
+#include "token.hpp"
 
 // -- Class --------------------------------------------------------------------
 
@@ -24,6 +26,9 @@ class Lexer {
 
   /** This attribute represents the input the lexer tokenizes. */
   Input input;
+
+  /** This queue stores the list of tokens produced by the lexer. */
+  std::deque<Token> tokens;
 
 public:
   /**
