@@ -35,9 +35,18 @@ find_package(YAEP REQUIRED)
 # = YAwn =
 # ========
 
+set(SOURCES_INPUT ${SOURCE_DIRECTORY}/input.hpp ${SOURCE_DIRECTORY}/input.cpp)
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+  set_source_files_properties(${SOURCES_INPUT}
+                              PROPERTIES
+                              COMPILE_FLAGS
+                              "-fno-sanitize=undefined")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+endif(CMAKE_COMPILER_IS_GNUCXX)
+
 set(SOURCE_FILES
-    ${SOURCE_DIRECTORY}/input.hpp
-    ${SOURCE_DIRECTORY}/input.cpp
+    ${SOURCES_INPUT}
     ${SOURCE_DIRECTORY}/token.hpp
     ${SOURCE_DIRECTORY}/token.cpp
     ${SOURCE_DIRECTORY}/lexer.hpp
