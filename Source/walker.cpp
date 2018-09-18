@@ -46,10 +46,10 @@ string toString(yaep_tree_node const *node) {
   yaep_anode anode = node->val.anode;
   string representation = string("<Abstract Node, ") + anode.name + ", " +
                           to_string(anode.cost) + ">";
-  yaep_tree_node **child = anode.children;
+  yaep_tree_node **children = anode.children;
 
-  while (child) {
-    representation += toString(*child);
+  for (size_t child = 0; children[child]; child++) {
+    representation += "\n" + toString(children[child]);
   }
 
   return representation;
