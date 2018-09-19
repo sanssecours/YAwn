@@ -65,7 +65,7 @@ void Lexer::scanEnd() {
   // addBlockEnd(0);
   tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
   tokens.push_back(createToken(-1, location, "EOF"));
-  // done = true;
+  done = true;
 }
 
 // ==========

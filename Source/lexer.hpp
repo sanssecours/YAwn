@@ -65,6 +65,12 @@ class Lexer {
   /** This variable stores the current line and column number. */
   Location location;
 
+  /**
+   * This boolean specifies if the lexer has already scanned the whole input or
+   * not.
+   */
+  bool done = false;
+
 #if defined(__clang__)
   /**
    * This variable stores the logger used by the lexer to print debug messages.
