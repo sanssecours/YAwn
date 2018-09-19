@@ -72,7 +72,7 @@ string toString(yaep_tree_node const *node, string const indent = "") {
  * @param root This variable stores the root of the tree this function visits.
  */
 kdb::KeySet Walker::walk(yaep_tree_node const *root) {
-  cout << "— Walk Tree —\n\n";
+  cout << "\n— Walk Tree —\n\n";
   cout << toString(root);
   cout << endl;
 
