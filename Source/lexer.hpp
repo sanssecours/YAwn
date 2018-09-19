@@ -78,6 +78,12 @@ class Lexer {
    */
   void scanStart();
 
+  /**
+   * @brief This method adds the token for the end of the YAML stream to
+   *        the token queue.
+   */
+  void scanEnd();
+
 public:
   /**
    * @brief This constructor initializes a lexer with the given input.

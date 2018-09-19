@@ -56,6 +56,18 @@ void Lexer::scanStart() {
   tokens.push_back(createToken(Token::STREAM_START, location, "STREAM START"));
 }
 
+/**
+ * @brief This method adds the token for the end of the YAML stream to
+ *        the token queue.
+ */
+void Lexer::scanEnd() {
+  LOG("Scan end token");
+  // addBlockEnd(0);
+  tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
+  tokens.push_back(createToken(-1, location, "EOF"));
+  // done = true;
+}
+
 // ==========
 // = Public =
 // ==========
@@ -75,7 +87,7 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
 
   scanStart();
   tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
-  tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
+  scanEnd();
 }
 
 /**
