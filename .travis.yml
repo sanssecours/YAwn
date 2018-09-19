@@ -77,6 +77,8 @@ before_install:
          cmake -GNinja -DCOMMON_FLAGS=-Wno-error .. && \
          sudo ninja install && \
          cd ../..
+      git clone --single-branch -b v1.x https://github.com/gabime/spdlog.git
+      sudo cp -R spdlog/include/spdlog /usr/local/include
     fi
 
 before_script:
