@@ -64,6 +64,7 @@ before_install:
       fi
       brew install elektra
       brew install ninja
+      brew install spdlog
     fi
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
