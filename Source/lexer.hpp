@@ -62,6 +62,9 @@ class Lexer {
    */
   std::deque<std::unique_ptr<Token>> emitted;
 
+  /** This variable stores the current line and column number. */
+  Location location;
+
 #if defined(__clang__)
   /**
    * This variable stores the logger used by the lexer to print debug messages.
