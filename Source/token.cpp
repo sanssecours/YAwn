@@ -30,11 +30,11 @@ Token::Token(int const type, std::string const &text)
  *
  * @return A number specifying the type of this token
  */
-int Token::getType() { return _type; }
+int Token::getType() const { return _type; }
 
 /**
  * @brief This method returns the content of the token.
  *
  * @return The text stored inside this token
  */
-string Token::getText() { return _text; }
+string Token::getText() const { return _text; }

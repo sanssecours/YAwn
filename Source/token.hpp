@@ -52,14 +52,14 @@ public:
    *
    * @return A number specifying the type of this token
    */
-  int getType();
+  int getType() const;
 
   /**
    * @brief This method returns the content of the token.
    *
    * @return The text stored inside this token
    */
-  std::string getText();
+  std::string getText() const;
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_TOKEN_HPP
