@@ -25,6 +25,17 @@ set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 find_package(Elektra REQUIRED)
 include_directories(${ELEKTRA_INCLUDE_DIR})
 
+# ==========
+# = spdlog =
+# ==========
+
+find_path(spdlog_INCLUDE_DIR
+          NAMES spdlog/spdlog.h
+          DOC "spdlog library header files")
+if(spdlog_INCLUDE_DIR STREQUAL spdlog_INCLUDE_DIR-NOTFOUND)
+  message(FATAL_ERROR "spdlog not found")
+endif(spdlog_INCLUDE_DIR STREQUAL spdlog_INCLUDE_DIR-NOTFOUND)
+
 # ========
 # = YAEP =
 # ========
