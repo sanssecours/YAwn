@@ -21,14 +21,14 @@
 
 class Token {
 
+  /** This variable stores the location of this token in the scanned text. */
+  Location _location;
+
   /** This attribute stores a number representing the kind of the token. */
   int _type;
 
   /** This variable stores the content stored inside the token. */
   std::string _text;
-
-  /** This variable stores the location of this token in the scanned text. */
-  Location location;
 
 public:
   /** This token type starts the YAML stream. */
@@ -52,10 +52,12 @@ public:
    * @brief This constructor creates a token from the given arguments.
    *
    * @param type This number specifies the type of the token.
+   * @param location This number specifies the location of the token in the
+   *                 scanned text.
    * @param text This variable specifies the content that should be stored
    *             in the token.
    */
-  Token(int const type, std::string const &text);
+  Token(int const type, Location const &location, std::string const &text);
 
   /**
    * @brief This method returns the type of the token.

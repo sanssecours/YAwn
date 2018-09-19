@@ -20,11 +20,13 @@ using std::to_string;
  * @brief This constructor creates a token from the given arguments.
  *
  * @param type This number specifies the type of the token.
+ * @param location This number specifies the location of the token in the
+                   scanned text.
  * @param text This variable specifies the content that should be stored
  *             in the token.
  */
-Token::Token(int const type, std::string const &text)
-    : _type{type}, _text{text} {}
+Token::Token(int const type, Location const &location, std::string const &text)
+    : _location{location}, _type{type}, _text{text} {}
 
 /**
  * @brief This method returns the type of the token.
@@ -50,8 +52,8 @@ string Token::getText() const { return _text; }
  **/
 string to_string(Token const token) {
   return "<Token, " + to_string(token.getType()) + ", " + token.getText() +
-         ", " + to_string(token.location.begin.line) + ":" +
-         to_string(token.location.begin.column) + "–" +
-         to_string(token.location.end.line) + ":" +
-         to_string(token.location.end.column) + ">";
+         ", " + to_string(token._location.begin.line) + ":" +
+         to_string(token._location.begin.column) + "–" +
+         to_string(token._location.end.line) + ":" +
+         to_string(token._location.end.column) + ">";
 }

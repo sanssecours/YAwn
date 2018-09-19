@@ -29,11 +29,14 @@ namespace {
  * Create a token with the given attributes.
  *
  * @param type This number specifies the type of the created token.
+ * @param location This number specifies the location of the token in the
+ *                 scanned text.
  * @param text This variable specifies the content that should be stored
  *             in the token.
  */
-unique_ptr<Token> createToken(int const type, string const &text) {
-  return unique_ptr<Token>{new Token{type, text}};
+unique_ptr<Token> createToken(int const type, Location const &location,
+                              string const &text) {
+  return unique_ptr<Token>{new Token{type, location, text}};
 }
 
 } // namespace
@@ -57,9 +60,9 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
 #endif
   LOG("Init lexer");
 
-  tokens.push_back(createToken(Token::STREAM_START, "STREAM START"));
-  tokens.push_back(createToken(Token::PLAIN_SCALAR, "Hello World"));
-  tokens.push_back(createToken(Token::STREAM_END, "STREAM END"));
+  tokens.push_back(createToken(Token::STREAM_START, location, "STREAM START"));
+  tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
+  tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
 }
 
 /**
@@ -75,7 +78,7 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
  */
 int Lexer::nextToken(void **attribute) {
   if (tokens.size() <= 0) {
-    tokens.push_front(createToken(-1, "EOF"));
+    tokens.push_front(createToken(-1, location, "EOF"));
   }
 
   emitted.push_back(move(tokens.front()));
