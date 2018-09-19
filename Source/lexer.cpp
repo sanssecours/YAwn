@@ -40,6 +40,10 @@ unique_ptr<Token> createToken(int const type, string const &text) {
 
 // -- Class --------------------------------------------------------------------
 
+// ==========
+// = Public =
+// ==========
+
 /**
  * @brief This constructor initializes a lexer with the given input.
  *
