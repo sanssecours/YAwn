@@ -12,6 +12,7 @@
 #include "token.hpp"
 
 using std::string;
+using std::to_string;
 
 // -- Class --------------------------------------------------------------------
 
@@ -38,3 +39,19 @@ int Token::getType() const { return _type; }
  * @return The text stored inside this token
  */
 string Token::getText() const { return _text; }
+
+/**
+ * @brief This function returns a string representation of a token.
+ *
+ * @param token This argument specifies the token for which this function
+ *              creates a string representation.
+ *
+ * @return A text representing the given token
+ **/
+string to_string(Token const token) {
+  return "<Token, " + to_string(token.getType()) + ", " + token.getText() +
+         ", " + to_string(token.location.begin.line) + ":" +
+         to_string(token.location.begin.column) + "–" +
+         to_string(token.location.end.line) + ":" +
+         to_string(token.location.end.column) + ">";
+}

@@ -39,6 +39,16 @@ public:
   static const int PLAIN_SCALAR = 3;
 
   /**
+   * @brief This function returns a string representation of a token.
+   *
+   * @param token This argument specifies the token for which this function
+   *              creates a string representation.
+   *
+   * @return A text representing the given token
+   **/
+  friend std::string to_string(Token token);
+
+  /**
    * @brief This constructor creates a token from the given arguments.
    *
    * @param type This number specifies the type of the token.
