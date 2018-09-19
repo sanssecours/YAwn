@@ -88,9 +88,10 @@ before_script:
 script:
   - ninja -C Build
   - Build/yawn Input/Null.yaml
-  - >
-     oclint -p Build
-     -no-analytics
-     -enable-global-analysis
-     -enable-clang-static-analyzer
-     Source/*.cpp
+  - |
+     if which oclint; then
+       oclint -p Build -no-analytics \
+              -enable-global-analysis \
+              -enable-clang-static-analyzer \
+              Source/*.cpp
+      fi
