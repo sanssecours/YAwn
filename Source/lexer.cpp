@@ -48,6 +48,42 @@ unique_ptr<Token> createToken(int const type, Location const &location,
 // ===========
 
 /**
+ * @brief This method adds new tokens to the token queue.
+ */
+void Lexer::fetchTokens() {
+  // scanToNextToken();
+  // location.step();
+  // addBlockEnd(location.begin.column);
+  LOGF("Fetch new token at location: {}:{}", location.begin.line,
+       location.begin.column);
+
+  // if (input.LA(1) == 0) {
+  //   scanEnd();
+  //   return;
+  // } else if (isValue()) {
+  //   scanValue();
+  //   return;
+  // } else if (isElement()) {
+  //   scanElement();
+  //   return;
+  // } else if (input.LA(1) == '"') {
+  //   scanDoubleQuotedScalar();
+  //   return;
+  // } else if (input.LA(1) == '\'') {
+  //   scanSingleQuotedScalar();
+  //   return;
+  // } else if (input.LA(1) == '#') {
+  //   scanComment();
+  //   return;
+  // }
+
+  // scanPlainScalar();
+
+  tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
+  scanEnd();
+}
+
+/**
  * @brief This method adds the token for the start of the YAML stream to
  *        the token queue.
  */
@@ -86,8 +122,7 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
   LOG("Init lexer");
 
   scanStart();
-  tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
-  scanEnd();
+  fetchTokens();
 }
 
 /**
