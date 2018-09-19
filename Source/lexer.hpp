@@ -72,6 +72,12 @@ class Lexer {
   shared_ptr<logger> console;
 #endif
 
+  /**
+   * @brief This method adds the token for the start of the YAML stream to
+   *        the token queue.
+   */
+  void scanStart();
+
 public:
   /**
    * @brief This constructor initializes a lexer with the given input.

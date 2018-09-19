@@ -43,6 +43,19 @@ unique_ptr<Token> createToken(int const type, Location const &location,
 
 // -- Class --------------------------------------------------------------------
 
+// ===========
+// = Private =
+// ===========
+
+/**
+ * @brief This method adds the token for the start of the YAML stream to
+ *        the token queue.
+ */
+void Lexer::scanStart() {
+  LOG("Scan start token");
+  tokens.push_back(createToken(Token::STREAM_START, location, "STREAM START"));
+}
+
 // ==========
 // = Public =
 // ==========
@@ -60,7 +73,7 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
 #endif
   LOG("Init lexer");
 
-  tokens.push_back(createToken(Token::STREAM_START, location, "STREAM START"));
+  scanStart();
   tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
   tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
 }
