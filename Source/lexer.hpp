@@ -9,6 +9,23 @@
 #ifndef ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 #define ELEKTRA_PLUGIN_YAWN_LEXER_HPP
 
+// -- Macros -------------------------------------------------------------------
+
+#define SPDLOG_TRACE_ON
+
+#if defined(__clang__)
+#define LOGF(fmt, ...)                                                         \
+  console->trace("{}:{}: " fmt, __FUNCTION__, __LINE__, __VA_ARGS__)
+#else
+#define LOGF(fmt, ...)
+#endif
+
+#if defined(__clang__)
+#define LOG(text) console->trace("{}:{}: {}", __FUNCTION__, __LINE__, text)
+#else
+#define LOG(text)
+#endif
+
 // -- Imports ------------------------------------------------------------------
 
 #include <deque>
@@ -17,6 +34,14 @@
 
 #include "input.hpp"
 #include "token.hpp"
+
+#if defined(__clang__)
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
+
+using spdlog::logger;
+using std::shared_ptr;
+#endif
 
 // -- Class --------------------------------------------------------------------
 
@@ -36,6 +61,13 @@ class Lexer {
    * tree.
    */
   std::deque<std::unique_ptr<Token>> emitted;
+
+#if defined(__clang__)
+  /**
+   * This variable stores the logger used by the lexer to print debug messages.
+   */
+  shared_ptr<logger> console;
+#endif
 
 public:
   /**

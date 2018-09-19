@@ -14,6 +14,13 @@ using std::ifstream;
 using std::string;
 using std::unique_ptr;
 
+#if defined(__clang__)
+using spdlog::set_level;
+using spdlog::set_pattern;
+using spdlog::stderr_color_mt;
+using spdlog::level::trace;
+#endif
+
 // -- Functions ----------------------------------------------------------------
 
 namespace {
@@ -39,6 +46,13 @@ unique_ptr<Token> createToken(int const type, string const &text) {
  * @param stream This stream specifies the text which this lexer analyzes.
  */
 Lexer::Lexer(ifstream &stream) : input{stream} {
+#if defined(__clang__)
+  set_pattern("[%H:%M:%S:%e] %v ");
+  set_level(trace);
+  console = stderr_color_mt("console");
+#endif
+  LOG("Init lexer");
+
   tokens.push_back(createToken(Token::STREAM_START, "STREAM START"));
   tokens.push_back(createToken(Token::PLAIN_SCALAR, "Hello World"));
   tokens.push_back(createToken(Token::STREAM_END, "STREAM END"));
