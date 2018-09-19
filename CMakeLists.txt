@@ -40,13 +40,15 @@ set(SOURCES_INPUT ${SOURCE_DIRECTORY}/input.hpp ${SOURCE_DIRECTORY}/input.cpp)
 if(CMAKE_COMPILER_IS_GNUCXX)
   # Work around error “unrecognized option '--push-state'”
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
+if(CMAKE_COMPILER_IS_GNUCXX OR ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  # Work around error in `libstdc++` version of `codecvt`
   set_source_files_properties(${SOURCES_INPUT}
                               PROPERTIES
                               COMPILE_FLAGS
                               "-fno-sanitize=undefined")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-endif(CMAKE_COMPILER_IS_GNUCXX)
+endif(CMAKE_COMPILER_IS_GNUCXX OR ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 
 set(SOURCE_FILES
     ${SOURCES_INPUT}
