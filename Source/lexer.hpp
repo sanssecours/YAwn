@@ -13,6 +13,7 @@
 
 #include <deque>
 #include <fstream>
+#include <memory>
 
 #include "input.hpp"
 #include "token.hpp"
@@ -25,7 +26,7 @@ class Lexer {
   Input input;
 
   /** This queue stores the list of tokens produced by the lexer. */
-  std::deque<Token> tokens;
+  std::deque<std::unique_ptr<Token>> tokens;
 
   /**
    * This variable stores tokens already emitted by the parser. We keep this
@@ -34,7 +35,7 @@ class Lexer {
    * memory, as long as other code accesses the token attributes of the syntax
    * tree.
    */
-  std::deque<Token> emitted;
+  std::deque<std::unique_ptr<Token>> emitted;
 
 public:
   /**

@@ -11,6 +11,25 @@
 #include "lexer.hpp"
 
 using std::ifstream;
+using std::string;
+using std::unique_ptr;
+
+// -- Functions ----------------------------------------------------------------
+
+namespace {
+
+/**
+ * Create a token with the given attributes.
+ *
+ * @param type This number specifies the type of the created token.
+ * @param text This variable specifies the content that should be stored
+ *             in the token.
+ */
+unique_ptr<Token> createToken(int const type, string const &text) {
+  return unique_ptr<Token>{new Token{type, text}};
+}
+
+} // namespace
 
 // -- Class --------------------------------------------------------------------
 
@@ -20,9 +39,9 @@ using std::ifstream;
  * @param stream This stream specifies the text which this lexer analyzes.
  */
 Lexer::Lexer(ifstream &stream) : input{stream} {
-  tokens.push_back(Token(Token::STREAM_START, "STREAM START"));
-  tokens.push_back(Token(Token::PLAIN_SCALAR, "Hello World"));
-  tokens.push_back(Token(Token::STREAM_END, "STREAM END"));
+  tokens.push_back(createToken(Token::STREAM_START, "STREAM START"));
+  tokens.push_back(createToken(Token::PLAIN_SCALAR, "Hello World"));
+  tokens.push_back(createToken(Token::STREAM_END, "STREAM END"));
 }
 
 /**
@@ -38,12 +57,12 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
  */
 int Lexer::nextToken(void **attribute) {
   if (tokens.size() <= 0) {
-    tokens.push_front(Token(-1, "EOF"));
+    tokens.push_front(createToken(-1, "EOF"));
   }
 
-  emitted.push_back(tokens.front());
+  emitted.push_back(move(tokens.front()));
   tokens.pop_front();
 
   *attribute = &emitted.back();
-  return emitted.back().getType();
+  return emitted.back()->getType();
 }

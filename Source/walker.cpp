@@ -9,6 +9,7 @@
 // -- Imports ------------------------------------------------------------------
 
 #include <iostream>
+#include <memory>
 
 #include "token.hpp"
 #include "walker.hpp"
@@ -17,6 +18,7 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::to_string;
+using std::unique_ptr;
 
 // -- Functions ----------------------------------------------------------------
 
@@ -36,7 +38,9 @@ string toString(yaep_tree_node const *node, string const indent = "") {
     return indent + "<Error>";
   case yaep_tree_node_type::YAEP_TERM:
     return indent + "<Terminal, " + to_string(node->val.term.code) + ", " +
-           static_cast<Token *>(node->val.term.attr)->getText() + ">";
+           (*(static_cast<unique_ptr<Token> *>(node->val.term.attr)))
+               ->getText() +
+           ">";
   case yaep_tree_node_type::YAEP_ALT:
     return indent + "<Alternative>";
   default:
