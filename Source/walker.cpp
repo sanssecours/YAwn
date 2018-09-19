@@ -36,16 +36,19 @@ string toString(yaep_tree_node const *node, string const indent = "") {
     return indent + "<Nil>";
   case yaep_tree_node_type::YAEP_ERROR:
     return indent + "<Error>";
-  case yaep_tree_node_type::YAEP_TERM:
-    return indent + "<Terminal, " + to_string(node->val.term.code) + ", " +
-           (*(static_cast<unique_ptr<Token> *>(node->val.term.attr)))
-               ->getText() +
-           ">";
   case yaep_tree_node_type::YAEP_ALT:
     return indent + "<Alternative>";
   default:
     break;
   }
+
+  if (node->type == yaep_tree_node_type::YAEP_TERM) {
+    return indent + "<Terminal, " + to_string(node->val.term.code) + ", " +
+           (*(static_cast<unique_ptr<Token> *>(node->val.term.attr)))
+               ->getText() +
+           ">";
+  }
+
   // Node is abstract
   yaep_anode anode = node->val.anode;
   string representation = indent + string("<Abstract Node, ") + anode.name +
