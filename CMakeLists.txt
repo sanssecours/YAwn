@@ -52,6 +52,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX OR ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 
 set(SOURCE_FILES
     ${SOURCES_INPUT}
+    ${SOURCE_DIRECTORY}/location.hpp
     ${SOURCE_DIRECTORY}/position.hpp
     ${SOURCE_DIRECTORY}/token.hpp
     ${SOURCE_DIRECTORY}/token.cpp
