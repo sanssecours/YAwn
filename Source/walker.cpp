@@ -28,7 +28,7 @@ namespace {
  * @brief This function returns the string representation of a tree node.
  *
  * @param node This argument stores the tree node that this function converts to
- *              a string.
+ *             a string.
  */
 string toString(yaep_tree_node const *node, string const indent = "") {
   switch (node->type) {
