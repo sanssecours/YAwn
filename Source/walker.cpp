@@ -16,6 +16,7 @@
 
 using std::cout;
 using std::endl;
+using std::move;
 using std::string;
 using std::to_string;
 using std::unique_ptr;
@@ -43,10 +44,9 @@ string toString(yaep_tree_node const *node, string const indent = "") {
   }
 
   if (node->type == yaep_tree_node_type::YAEP_TERM) {
-    return indent + "<Terminal, " + to_string(node->val.term.code) + ", " +
-           (*(static_cast<unique_ptr<Token> *>(node->val.term.attr)))
-               ->getText() +
-           ">";
+    unique_ptr<Token> token =
+        move(*(static_cast<unique_ptr<Token> *>(node->val.term.attr)));
+    return indent + to_string(*token);
   }
 
   // Node is abstract
