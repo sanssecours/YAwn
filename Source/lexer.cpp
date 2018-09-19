@@ -41,8 +41,9 @@ int Lexer::nextToken(void **attribute) {
     tokens.push_front(Token(-1, "EOF"));
   }
 
-  *attribute = &tokens.front();
-  int kind = tokens.front().getType();
+  emitted.push_back(tokens.front());
   tokens.pop_front();
-  return kind;
+
+  *attribute = &emitted.back();
+  return emitted.back().getType();
 }

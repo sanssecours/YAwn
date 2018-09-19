@@ -27,6 +27,15 @@ class Lexer {
   /** This queue stores the list of tokens produced by the lexer. */
   std::deque<Token> tokens;
 
+  /**
+   * This variable stores tokens already emitted by the parser. We keep this
+   * list, since the syntax tree produced by YAEP only stores references to
+   * tokens. As a consequence we need to keep the referenced tokens in
+   * memory, as long as other code accesses the token attributes of the syntax
+   * tree.
+   */
+  std::deque<Token> emitted;
+
 public:
   /**
    * @brief This constructor initializes a lexer with the given input.
