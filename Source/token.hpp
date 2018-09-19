@@ -14,6 +14,7 @@
 
 #include <string>
 
+#include "location.hpp"
 #include "token.hpp"
 
 // -- Class --------------------------------------------------------------------
@@ -25,6 +26,9 @@ class Token {
 
   /** This variable stores the content stored inside the token. */
   std::string _text;
+
+  /** This variable stores the location of this token in the scanned text. */
+  Location location;
 
 public:
   /** This token type starts the YAML stream. */
