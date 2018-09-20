@@ -211,6 +211,12 @@ class Lexer {
    */
   size_t countPlainSpace() const;
 
+  /**
+   * @brief This method scans a mapping value token and adds it to the token
+   *        queue.
+   */
+  void scanValue();
+
 public:
   /**
    * @brief This constructor initializes a lexer with the given input.

@@ -8,10 +8,13 @@
 
 // -- Imports ------------------------------------------------------------------
 
+#include <stdexcept>
+
 #include "lexer.hpp"
 
 using std::ifstream;
 using std::make_pair;
+using std::runtime_error;
 using std::string;
 using std::unique_ptr;
 
@@ -191,11 +194,11 @@ void Lexer::fetchTokens() {
   if (input.LA(1) == 0) {
     scanEnd();
     return;
+  } else if (isValue()) {
+    scanValue();
+    return;
   }
-  // else if (isValue()) {
-  //   scanValue();
-  //   return;
-  // } else if (isElement()) {
+  // else if (isElement()) {
   //   scanElement();
   //   return;
   // } else if (input.LA(1) == '"') {
@@ -297,6 +300,31 @@ size_t Lexer::countPlainSpace() const {
   }
   LOGF("Found {} space characters", lookahead - 1);
   return lookahead - 1;
+}
+
+/**
+ * @brief This method scans a mapping value token and adds it to the token
+ *        queue.
+ */
+void Lexer::scanValue() {
+  LOG("Scan value");
+  forward(1);
+  tokens.push_back(
+      createToken(Token::VALUE, location, input.getText(input.index() - 1)));
+  forward(1);
+  if (simpleKey.first == nullptr) {
+    throw runtime_error("Unable to locate key for value");
+  }
+  size_t offset = simpleKey.second - emitted.size();
+  auto key = move(simpleKey.first);
+  auto start = key->getStart();
+  tokens.insert(tokens.begin() + offset, move(key));
+  simpleKey.first = nullptr; // Remove key candidate
+  if (addIndentation(start.column)) {
+    location.begin = start;
+    tokens.insert(tokens.begin() + offset,
+                  createToken(Token::MAPPING_START, location, "MAPPING START"));
+  }
 }
 
 // ==========
