@@ -48,6 +48,46 @@ unique_ptr<Token> createToken(int const type, Location const &location,
 // ===========
 
 /**
+ * @brief This method checks if the input at the specified offset starts a key
+ *        value token.
+ *
+ * @param offset This parameter specifies an offset to the current position,
+ *               where this function will look for a key value token.
+ *
+ * @retval true If the input matches a key value token
+ * @retval false Otherwise
+ */
+bool Lexer::isValue(size_t const offset) const {
+  return (input.LA(offset) == ':') &&
+         (input.LA(offset + 1) == '\n' || input.LA(offset + 1) == ' ');
+}
+
+/**
+ * @brief This method checks if the current input starts a list element.
+ *
+ * @retval true If the input matches a list element token
+ * @retval false Otherwise
+ */
+bool Lexer::isElement() const {
+  return (input.LA(1) == '-') && (input.LA(2) == '\n' || input.LA(2) == ' ');
+}
+
+/**
+ * @brief This method checks if the input at the specified offset starts a line
+ *        comment.
+ *
+ * @param offset This parameter specifies an offset to the current position,
+ *               where this function will look for a comment token.
+ *
+ * @retval true If the input matches a comment token
+ * @retval false Otherwise
+ */
+bool Lexer::isComment(size_t const offset) const {
+  return (input.LA(offset) == '#') &&
+         (input.LA(offset + 1) == '\n' || input.LA(offset + 1) == ' ');
+}
+
+/**
  * @brief This method consumes characters from the input stream keeping
  *        track of line and column numbers.
  *
