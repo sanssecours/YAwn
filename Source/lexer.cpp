@@ -11,6 +11,7 @@
 #include "lexer.hpp"
 
 using std::ifstream;
+using std::make_pair;
 using std::string;
 using std::unique_ptr;
 
@@ -129,6 +130,15 @@ void Lexer::addBlockEnd(size_t const lineIndex) {
 }
 
 /**
+ * @brief This method saves a token for a simple key candidate located at the
+ *        current input position.
+ */
+void Lexer::addSimpleKeyCandidate() {
+  size_t position = tokens.size() + emitted.size();
+  simpleKey = make_pair(createToken(Token::KEY, location, "KEY"), position);
+}
+
+/**
  * @brief This method removes uninteresting characters from the input.
  */
 void Lexer::scanToNextToken() {
@@ -210,7 +220,7 @@ void Lexer::scanEnd() {
 void Lexer::scanPlainScalar() {
   LOG("Scan plain scalar");
   // A plain scalar can start a simple key
-  // addSimpleKeyCandidate();
+  addSimpleKeyCandidate();
 
   size_t lengthSpace = 0;
   size_t lengthNonSpace = 0;

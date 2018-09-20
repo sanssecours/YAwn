@@ -147,6 +147,12 @@ class Lexer {
   void addBlockEnd(size_t const lineIndex);
 
   /**
+   * @brief This method saves a token for a simple key candidate located at the
+   *        current input position.
+   */
+  void addSimpleKeyCandidate();
+
+  /**
    * @brief This method removes uninteresting characters from the input.
    */
   void scanToNextToken();
