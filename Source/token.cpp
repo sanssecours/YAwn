@@ -36,6 +36,13 @@ Token::Token(int const type, Location const &location, std::string const &text)
 int Token::getType() const { return _type; }
 
 /**
+ * @brief This method returns the current start position of the token.
+ *
+ * @return The start position of this token
+ */
+Position Token::getStart() const { return _location.begin; }
+
+/**
  * @brief This method returns the content of the token.
  *
  * @return The text stored inside this token
