@@ -73,6 +73,22 @@ void Lexer::forward(size_t const characters = 1) {
 }
 
 /**
+ * @brief This method adds block closing tokens to the token queue, if the
+ *        indentation decreased.
+ *
+ * @param lineIndex This parameter specifies the column (indentation in number
+ *                  of spaces) for which this method should add block end
+ *                  tokens.
+ */
+void Lexer::addBlockEnd(size_t const lineIndex) {
+  while (lineIndex < indents.top()) {
+    LOG("Add block end");
+    tokens.push_back(createToken(Token::BLOCK_END, location, "BLOCK END"));
+    indents.pop();
+  }
+}
+
+/**
  * @brief This method removes uninteresting characters from the input.
  */
 void Lexer::scanToNextToken() {
@@ -99,7 +115,7 @@ void Lexer::scanToNextToken() {
 void Lexer::fetchTokens() {
   scanToNextToken();
   location.step();
-  // addBlockEnd(location.begin.column);
+  addBlockEnd(location.begin.column);
   LOGF("Fetch new token at location: {}:{}", location.begin.line,
        location.begin.column);
 
@@ -142,7 +158,7 @@ void Lexer::scanStart() {
  */
 void Lexer::scanEnd() {
   LOG("Scan end token");
-  // addBlockEnd(0);
+  addBlockEnd(0);
   tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
   tokens.push_back(createToken(-1, location, "EOF"));
   done = true;

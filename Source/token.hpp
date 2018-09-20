@@ -37,6 +37,8 @@ public:
   static const int STREAM_END = 2;
   /** This token type specifies that the token stores a plain scalar. */
   static const int PLAIN_SCALAR = 3;
+  /** This token type indicates the end of a block collection. */
+  static const int BLOCK_END = 7;
 
   /**
    * @brief This function returns a string representation of a token.

@@ -1,7 +1,8 @@
 TERM
 STREAM_START = 1
 STREAM_END = 2
-PLAIN_SCALAR = 3;
+PLAIN_SCALAR = 3
+BLOCK_END = 7;
 
 yaml : STREAM_START node_or_empty STREAM_END # yaml (1)
      ;

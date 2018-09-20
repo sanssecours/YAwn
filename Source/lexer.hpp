@@ -31,6 +31,7 @@
 #include <deque>
 #include <fstream>
 #include <memory>
+#include <stack>
 
 #include "input.hpp"
 #include "token.hpp"
@@ -66,6 +67,12 @@ class Lexer {
   Location location;
 
   /**
+   * This stack stores the indentation (in number of characters) for each
+   * block collection.
+   */
+  std::stack<size_t> indents{std::deque<size_t>{0}};
+
+  /**
    * This boolean specifies if the lexer has already scanned the whole input or
    * not.
    */
@@ -86,6 +93,16 @@ class Lexer {
    *                   the function should consume.
    */
   void forward(size_t const characters);
+
+  /**
+   * @brief This method adds block closing tokens to the token queue, if the
+   *        indentation decreased.
+   *
+   * @param lineIndex This parameter specifies the column (indentation in number
+   *                  of spaces) for which this method should add block end
+   *                  tokens.
+   */
+  void addBlockEnd(size_t const lineIndex);
 
   /**
    * @brief This method removes uninteresting characters from the input.
