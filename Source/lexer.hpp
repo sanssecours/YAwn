@@ -232,6 +232,11 @@ class Lexer {
   size_t countPlainSpace() const;
 
   /**
+   * @brief This method scans a comment and adds it to the token queue.
+   */
+  void scanComment();
+
+  /**
    * @brief This method scans a mapping value token and adds it to the token
    *        queue.
    */

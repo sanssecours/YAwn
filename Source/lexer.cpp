@@ -221,11 +221,10 @@ void Lexer::fetchTokens() {
   } else if (input.LA(1) == '\'') {
     scanSingleQuotedScalar();
     return;
+  } else if (input.LA(1) == '#') {
+    scanComment();
+    return;
   }
-  // else if (input.LA(1) == '#') {
-  //   scanComment();
-  //   return;
-  // }
 
   scanPlainScalar();
 }
@@ -355,6 +354,18 @@ size_t Lexer::countPlainSpace() const {
   }
   LOGF("Found {} space characters", lookahead - 1);
   return lookahead - 1;
+}
+
+/**
+ * @brief This method scans a comment and adds it to the token queue.
+ */
+void Lexer::scanComment() {
+  LOG("Scan comment");
+  size_t start = input.index();
+  while (input.LA(1) != '\n') {
+    forward();
+  }
+  tokens.push_back(createToken(Token::COMMENT, location, input.getText(start)));
 }
 
 /**
