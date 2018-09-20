@@ -14,6 +14,55 @@
 using std::string;
 using std::to_string;
 
+// -- Functions ----------------------------------------------------------------
+
+namespace {
+
+/**
+ * @brief This function returns the sting representation of a token type.
+ *
+ * @param type This variable specifies the token type that should be converted.
+ *
+ * @return A string representation of the given token type
+ */
+string typeToString(int const type)
+#ifdef __llvm__
+    __attribute__((annotate("oclint:suppress[high cyclomatic complexity]")))
+#endif
+{
+  switch (type) {
+  case Token::STREAM_START:
+    return "STREAM_START";
+  case Token::STREAM_END:
+    return "STREAM_END";
+  case Token::PLAIN_SCALAR:
+    return "PLAIN_SCALAR";
+  case Token::KEY:
+    return "KEY";
+  case Token::VALUE:
+    return "VALUE";
+  case Token::MAPPING_START:
+    return "MAPPING_START";
+  case Token::BLOCK_END:
+    return "BLOCK_END";
+  case Token::ELEMENT:
+    return "ELEMENT";
+  case Token::SEQUENCE_START:
+    return "SEQUENCE_START";
+  case Token::DOUBLE_QUOTED_SCALAR:
+    return "DOUBLE_QUOTED_SCALAR";
+  case Token::COMMENT:
+    return "COMMENT";
+  case Token::SINGLE_QUOTED_SCALAR:
+    return "SINGLE_QUOTED_SCALAR";
+  default:
+    break;
+  }
+  return "EOF";
+}
+
+} // namespace
+
 // -- Class --------------------------------------------------------------------
 
 /**
@@ -58,7 +107,7 @@ string Token::getText() const { return _text; }
  * @return A text representing the given token
  **/
 string to_string(Token const token) {
-  return "<Token, " + to_string(token.getType()) + ", " + token.getText() +
+  return "<Token, " + typeToString(token.getType()) + ", " + token.getText() +
          ", " + to_string(token._location.begin.line) + ":" +
          to_string(token._location.begin.column) + "–" +
          to_string(token._location.end.line) + ":" +
