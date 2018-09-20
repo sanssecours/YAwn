@@ -9,7 +9,7 @@ export PROGRAM := yawn
 
 all: lint
 
-lint: run
+lint: test
 	@printf '\n✨ Lint\n'
 	@oclint -p Build -no-analytics -enable-global-analysis \
 	        -enable-clang-static-analyzer Source/*.cpp
