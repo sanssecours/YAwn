@@ -215,11 +215,11 @@ void Lexer::fetchTokens() {
   } else if (isElement()) {
     scanElement();
     return;
+  } else if (input.LA(1) == '"') {
+    scanDoubleQuotedScalar();
+    return;
   }
-  // else if (input.LA(1) == '"') {
-  //   scanDoubleQuotedScalar();
-  //   return;
-  // } else if (input.LA(1) == '\'') {
+  // else if (input.LA(1) == '\'') {
   //   scanSingleQuotedScalar();
   //   return;
   // } else if (input.LA(1) == '#') {
@@ -249,6 +249,26 @@ void Lexer::scanEnd() {
   tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
   tokens.push_back(createToken(-1, location, "EOF"));
   done = true;
+}
+
+/**
+ * @brief This method scans a double quoted scalar and adds it to the token
+ *        queue.
+ */
+void Lexer::scanDoubleQuotedScalar() {
+  LOG("Scan double quoted scalar");
+  size_t start = input.index();
+
+  // A double quoted scalar can start a simple key
+  addSimpleKeyCandidate();
+
+  forward(); // Include initial double quote
+  while (input.LA(1) != '"') {
+    forward();
+  }
+  forward(); // Include closing double quote
+  tokens.push_back(
+      createToken(Token::DOUBLE_QUOTED_SCALAR, location, input.getText(start)));
 }
 
 /**
