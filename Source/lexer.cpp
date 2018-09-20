@@ -103,10 +103,11 @@ void Lexer::fetchTokens() {
   LOGF("Fetch new token at location: {}:{}", location.begin.line,
        location.begin.column);
 
-  // if (input.LA(1) == 0) {
-  //   scanEnd();
-  //   return;
-  // } else if (isValue()) {
+  if (input.LA(1) == 0) {
+    scanEnd();
+    return;
+  }
+  // else if (isValue()) {
   //   scanValue();
   //   return;
   // } else if (isElement()) {
@@ -124,9 +125,6 @@ void Lexer::fetchTokens() {
   // }
 
   // scanPlainScalar();
-
-  tokens.push_back(createToken(Token::PLAIN_SCALAR, location, "Hello World"));
-  scanEnd();
 }
 
 /**
