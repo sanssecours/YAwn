@@ -73,6 +73,16 @@ class Lexer {
   std::stack<size_t> indents{std::deque<size_t>{0}};
 
   /**
+   * This pair stores a simple key candidate token (first part) and its
+   * position in the token queue (second part).
+   *
+   * Since the lexer only supports block syntax for mappings and sequences we
+   * use a single token here. If we need support for flow collections we have
+   * to store a candidate for each flow level (block context = flow level 0).
+   */
+  std::pair<std::unique_ptr<Token>, size_t> simpleKey;
+
+  /**
    * This boolean specifies if the lexer has already scanned the whole input or
    * not.
    */
