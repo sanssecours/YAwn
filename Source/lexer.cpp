@@ -130,6 +130,25 @@ void Lexer::addBlockEnd(size_t const lineIndex) {
 }
 
 /**
+ * @brief This function adds an indentation value if the given value is smaller
+ *        than the current indentation.
+ *
+ * @param lineIndex This parameter specifies the indentation value that this
+ *                  function compares to the current indentation.
+ *
+ * @retval true If the function added an indentation value
+ * @retval false Otherwise
+ */
+bool Lexer::addIndentation(size_t const lineIndex) {
+  if (lineIndex > indents.top()) {
+    LOGF("Add indentation {}", lineIndex);
+    indents.push(lineIndex);
+    return true;
+  }
+  return false;
+}
+
+/**
  * @brief This method saves a token for a simple key candidate located at the
  *        current input position.
  */
