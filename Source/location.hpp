@@ -23,6 +23,11 @@ public:
   Position begin;
   /** This attribute stores the position where the token ends. */
   Position end;
+
+  /**
+   * This method sets the start position to the current end position.
+   */
+  void step() { begin = end; }
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_LOCATION_HPP

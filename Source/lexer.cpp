@@ -52,7 +52,7 @@ unique_ptr<Token> createToken(int const type, Location const &location,
  */
 void Lexer::fetchTokens() {
   // scanToNextToken();
-  // location.step();
+  location.step();
   // addBlockEnd(location.begin.column);
   LOGF("Fetch new token at location: {}:{}", location.begin.line,
        location.begin.column);
