@@ -217,6 +217,12 @@ class Lexer {
    */
   void scanValue();
 
+  /**
+   * @brief This method scans a list element token and adds it to the token
+   *        queue.
+   */
+  void scanElement();
+
 public:
   /**
    * @brief This constructor initializes a lexer with the given input.

@@ -197,11 +197,11 @@ void Lexer::fetchTokens() {
   } else if (isValue()) {
     scanValue();
     return;
+  } else if (isElement()) {
+    scanElement();
+    return;
   }
-  // else if (isElement()) {
-  //   scanElement();
-  //   return;
-  // } else if (input.LA(1) == '"') {
+  // else if (input.LA(1) == '"') {
   //   scanDoubleQuotedScalar();
   //   return;
   // } else if (input.LA(1) == '\'') {
@@ -325,6 +325,22 @@ void Lexer::scanValue() {
     tokens.insert(tokens.begin() + offset,
                   createToken(Token::MAPPING_START, location, "MAPPING START"));
   }
+}
+
+/**
+ * @brief This method scans a list element token and adds it to the token
+ *        queue.
+ */
+void Lexer::scanElement() {
+  LOG("Scan element");
+  if (addIndentation(location.end.column)) {
+    tokens.push_back(
+        createToken(Token::SEQUENCE_START, location, "SEQUENCE START"));
+  }
+  forward(1);
+  tokens.push_back(
+      createToken(Token::ELEMENT, location, input.getText(input.index() - 1)));
+  forward(1);
 }
 
 // ==========
