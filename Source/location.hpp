@@ -25,7 +25,7 @@ public:
   Position end;
 
   /**
-   * This method sets the start position to the current end position.
+   * @brief This method sets the start position to the current end position.
    */
   void step() { begin = end; }
 };
