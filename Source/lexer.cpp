@@ -218,11 +218,11 @@ void Lexer::fetchTokens() {
   } else if (input.LA(1) == '"') {
     scanDoubleQuotedScalar();
     return;
+  } else if (input.LA(1) == '\'') {
+    scanSingleQuotedScalar();
+    return;
   }
-  // else if (input.LA(1) == '\'') {
-  //   scanSingleQuotedScalar();
-  //   return;
-  // } else if (input.LA(1) == '#') {
+  // else if (input.LA(1) == '#') {
   //   scanComment();
   //   return;
   // }
@@ -249,6 +249,26 @@ void Lexer::scanEnd() {
   tokens.push_back(createToken(Token::STREAM_END, location, "STREAM END"));
   tokens.push_back(createToken(-1, location, "EOF"));
   done = true;
+}
+
+/**
+ * @brief This method scans a single quoted scalar and adds it to the token
+ *        queue.
+ */
+void Lexer::scanSingleQuotedScalar() {
+  LOG("Scan single quoted scalar");
+
+  size_t start = input.index();
+  // A single quoted scalar can start a simple key
+  addSimpleKeyCandidate();
+
+  forward(); // Include initial single quote
+  while (input.LA(1) != '\'' || input.LA(2) == '\'') {
+    forward();
+  }
+  forward(); // Include closing single quote
+  tokens.push_back(
+      createToken(Token::SINGLE_QUOTED_SCALAR, location, input.getText(start)));
 }
 
 /**

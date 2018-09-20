@@ -195,6 +195,12 @@ class Lexer {
   void scanEnd();
 
   /**
+   * @brief This method scans a single quoted scalar and adds it to the token
+   *        queue.
+   */
+  void scanSingleQuotedScalar();
+
+  /**
    * @brief This method scans a double quoted scalar and adds it to the token
    *        queue.
    */
