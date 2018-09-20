@@ -48,10 +48,56 @@ unique_ptr<Token> createToken(int const type, Location const &location,
 // ===========
 
 /**
+ * @brief This method consumes characters from the input stream keeping
+ *        track of line and column numbers.
+ *
+ * @param characters This parameter specifies the number of characters the
+ *                   the function should consume.
+ */
+void Lexer::forward(size_t const characters = 1) {
+  LOGF("Forward {} characters", characters);
+
+  for (size_t charsLeft = characters; charsLeft > 0; charsLeft--) {
+    if (input.LA(1) == 0) {
+      LOG("Hit EOF!");
+      return;
+    }
+
+    location += 1;
+    if (input.LA(1) == '\n') {
+      location.end.column = 1;
+      location.lines();
+    }
+    input.consume();
+  }
+}
+
+/**
+ * @brief This method removes uninteresting characters from the input.
+ */
+void Lexer::scanToNextToken() {
+  LOG("Scan to next token");
+  bool found = false;
+  while (!found) {
+    while (input.LA(1) == ' ') {
+      forward();
+    }
+    LOG("Skipped whitespace");
+    if (input.LA(1) == '\n') {
+      forward();
+      LOG("Skipped newline");
+    } else {
+      found = true;
+      LOG("Found next token");
+    }
+  }
+}
+
+/**
  * @brief This method adds new tokens to the token queue.
  */
 void Lexer::fetchTokens() {
-  // scanToNextToken();
+  scanToNextToken();
   location.step();
   // addBlockEnd(location.begin.column);
   LOGF("Fetch new token at location: {}:{}", location.begin.line,
