@@ -94,7 +94,6 @@ before_script:
 
 script:
   - ninja -C Build
-  - Build/yawn Input/Null.yaml
   - |
      if which oclint; then
        oclint -p Build -no-analytics \
@@ -102,3 +101,4 @@ script:
               -enable-clang-static-analyzer \
               Source/*.cpp
       fi
+  - Test/test.fish
