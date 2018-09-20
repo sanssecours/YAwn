@@ -170,6 +170,14 @@ class Lexer {
   void scanToNextToken();
 
   /**
+   * @brief This function checks if the lexer needs to scan additional tokens.
+   *
+   * @retval true If the lexer should fetch additional tokens
+   * @retval false Otherwise
+   */
+  bool needMoreTokens() const;
+
+  /**
    * @brief This method adds new tokens to the token queue.
    */
   void fetchTokens();

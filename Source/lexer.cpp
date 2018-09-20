@@ -161,6 +161,21 @@ void Lexer::addSimpleKeyCandidate() {
 }
 
 /**
+ * @brief This function checks if the lexer needs to scan additional tokens.
+ *
+ * @retval true If the lexer should fetch additional tokens
+ * @retval false Otherwise
+ */
+bool Lexer::needMoreTokens() const {
+  if (done) {
+    return false;
+  }
+
+  bool keyCandidateExists = simpleKey.first != nullptr;
+  return keyCandidateExists || tokens.empty();
+}
+
+/**
  * @brief This method removes uninteresting characters from the input.
  */
 void Lexer::scanToNextToken() {
@@ -376,6 +391,16 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
  * @return The number of the first token the parser has not emitted yet.
  */
 int Lexer::nextToken(void **attribute) {
+  while (needMoreTokens()) {
+    fetchTokens();
+  }
+  string output;
+  output += "\n\nTokens:\n";
+  for (auto const &token : tokens) {
+    output += "\t" + to_string(*token) + "\n";
+  }
+  LOG(output);
+
   if (tokens.size() <= 0) {
     tokens.push_front(createToken(-1, location, "EOF"));
   }
