@@ -54,6 +54,22 @@ public:
   void exitValue(std::string const &text);
 
   /**
+   * @brief This function will be called after the walker exits a key node.
+   *
+   * @param text This variable contains the text of the key.
+   */
+  void exitKey(string const &text);
+
+  /**
+   * @brief This function will be called after the walker found a key-value
+   *        pair.
+   *
+   * @param matchedValue This variable specifies if the pair contains a value
+   *                     or not.
+   */
+  void exitPair(bool const matchedValue);
+
+  /**
    * @brief This method returns the key set of the listener.
    *
    * @return A key set created by the walker by calling methods of this class

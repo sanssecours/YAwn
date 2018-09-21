@@ -82,15 +82,21 @@ void executeListenerMethods(Listener &listener, yaep_tree_node const *node) {
   // Node is abstract
   yaep_anode anode = node->val.anode;
 
-  if (string(anode.name) == "value") {
-    auto token = anode.children[0]->val.term.attr;
-    listener.exitValue((**static_cast<unique_ptr<Token> *>(token)).getText());
-    return;
-  }
-
   yaep_tree_node **children = anode.children;
   for (size_t child = 0; children[child]; child++) {
     executeListenerMethods(listener, children[child]);
+  }
+
+  if (string(anode.name) == "value") {
+    auto token = anode.children[0]->val.term.attr;
+    listener.exitValue((**static_cast<unique_ptr<Token> *>(token)).getText());
+  } else if (string(anode.name) == "key") {
+    auto token = anode.children[0]->val.term.attr;
+    listener.exitKey((**static_cast<unique_ptr<Token> *>(token)).getText());
+  } else if (string(anode.name) == "pair") {
+    bool matchedValue =
+        anode.children[1]->type != yaep_tree_node_type::YAEP_NIL;
+    listener.exitPair(matchedValue);
   }
 }
 
