@@ -27,7 +27,9 @@ comments : COMMENT
          | comments COMMENT
          ;
 
-value : PLAIN_SCALAR         # 0
-      | SINGLE_QUOTED_SCALAR # 0
-      | DOUBLE_QUOTED_SCALAR # 0
+value : scalar # 0 ;
+scalar : PLAIN_SCALAR         # 0
+       | SINGLE_QUOTED_SCALAR # 0
+       | DOUBLE_QUOTED_SCALAR # 0
+       ;
       ;
