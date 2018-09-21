@@ -29,4 +29,5 @@ child : value # value ( 0 )
 
 value : PLAIN_SCALAR         # 0
       | SINGLE_QUOTED_SCALAR # 0
+      | DOUBLE_QUOTED_SCALAR # 0
       ;
