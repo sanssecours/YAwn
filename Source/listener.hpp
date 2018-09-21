@@ -47,7 +47,7 @@ public:
   Listener(kdb::Key const &parent);
 
   /**
-   * @brief This function will be called after the walker found a value.
+   * @brief This function will be called after the walker exits a value node.
    *
    * @param text This variable contains the text stored in the value.
    */
@@ -61,8 +61,8 @@ public:
   void exitKey(string const &text);
 
   /**
-   * @brief This function will be called after the walker found a key-value
-   *        pair.
+   * @brief This function will be called after the walker exits the node for a
+   *        key-value pair.
    *
    * @param matchedValue This variable specifies if the pair contains a value
    *                     or not.
