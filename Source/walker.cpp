@@ -32,7 +32,7 @@ namespace {
  * @param node This argument stores the tree node that this function converts to
  *             a string.
  */
-string toString(yaep_tree_node const *node, string const indent = "") {
+string toString(yaep_tree_node const *const node, string const indent = "") {
   switch (node->type) {
   case yaep_tree_node_type::YAEP_NIL:
     return indent + "<Nil>";
