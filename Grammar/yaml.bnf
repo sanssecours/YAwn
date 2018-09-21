@@ -24,5 +24,8 @@ comments : COMMENT
          | comments COMMENT
          ;
 
-child : PLAIN_SCALAR # 0
+child : value # value ( 0 )
+      ;
+
+value : PLAIN_SCALAR # 0
       ;
