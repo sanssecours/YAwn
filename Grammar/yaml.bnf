@@ -18,8 +18,8 @@ child_comments_empty : child # 0
                      |
                      ;
 
-child : comments_empty node comments_empty # child (1);
-node : value # value ( 0 )
+child : comments_empty node comments_empty # child (1) ;
+node : value # value (0)
      ;
 
 comments_empty : comments | ;
