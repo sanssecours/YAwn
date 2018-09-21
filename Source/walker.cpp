@@ -15,6 +15,7 @@
 #include "token.hpp"
 #include "walker.hpp"
 
+using std::cerr;
 using std::cout;
 using std::endl;
 using std::move;
@@ -62,20 +63,53 @@ string toString(yaep_tree_node const *const node, string const indent = "") {
   return representation;
 }
 
+/**
+ * @brief This function traverses a tree executing methods of a listener class.
+ *
+ * @param listener The function calls methods of this class while it traverses
+ *                 the tree.
+ *
+ * @param node This argument stores the tree node that this function traverses.
+ */
+void executeListenerMethods(Listener &listener, yaep_tree_node const *node) {
+  if (node->type == yaep_tree_node_type::YAEP_TERM ||
+      node->type == yaep_tree_node_type::YAEP_NIL) {
+    return;
+  }
+  assert(node->type == yaep_tree_node_type::YAEP_ANODE &&
+         "Found unexpected node type");
+
+  // Node is abstract
+  yaep_anode anode = node->val.anode;
+
+  if (string(anode.name) == "value") {
+    auto token = anode.children[0]->val.term.attr;
+    listener.exitValue((**static_cast<unique_ptr<Token> *>(token)).getText());
+    return;
+  }
+
+  yaep_tree_node **children = anode.children;
+  for (size_t child = 0; children[child]; child++) {
+    executeListenerMethods(listener, children[child]);
+  }
+}
+
 } // namespace
 
 // -- Class --------------------------------------------------------------------
 
 /**
- * @brief This method walks a syntax tree to produce some useful information.
+ * @brief This method walks a syntax tree calling methods of the given
+ *        listener.
  *
+ * @param listener This argument specifies the listener which this function
+ *                 uses to convert the syntax tree to a key set.
  * @param root This variable stores the root of the tree this function visits.
  */
-kdb::KeySet Walker::walk(yaep_tree_node const *root) {
-  cout << "\n— Walk Tree —\n\n";
+void Walker::walk(Listener &listener, yaep_tree_node const *root) {
+  cout << "\n— Syntax Tree —\n\n";
   cout << toString(root);
   cout << endl;
 
-  Listener listener;
-  return listener.getKeySet();
+  executeListenerMethods(listener, root);
 }

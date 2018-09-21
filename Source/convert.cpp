@@ -10,6 +10,7 @@
 #include "convert.hpp"
 #include "error_listener.hpp"
 #include "lexer.hpp"
+#include "listener.hpp"
 #include "memory.hpp"
 #include "walker.hpp"
 
@@ -22,6 +23,7 @@ using std::stringstream;
 
 using CppKey = kdb::Key;
 using CppKeySet = kdb::KeySet;
+using ckdb::keyNew;
 
 namespace {
 
@@ -155,8 +157,10 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
     return -1;
   }
 
+  Listener listener{keyNew("user", KEY_END, "", KEY_VALUE)};
   Walker walker;
-  keySet.append(walker.walk(root));
+  walker.walk(listener, root);
+  keySet.append(listener.getKeySet());
 
   return 0;
 }

@@ -11,9 +11,13 @@
 
 // -- Imports ------------------------------------------------------------------
 
+#include <stack>
+
 #include <kdb.hpp>
 
 #include <yaep.h>
+
+using std::string;
 
 // -- Class --------------------------------------------------------------------
 
@@ -27,7 +31,28 @@ class Listener {
   /** This variable stores the key set that this listener creates. */
   kdb::KeySet keys;
 
+  /**
+   * This stack stores a key for each level of the current key name below
+   * parent.
+   */
+  std::stack<kdb::Key> parents;
+
 public:
+  /**
+   * @brief This constructor creates a Listener using the given parent key.
+   *
+   * @param parent This argument specifies the parent key of the key set this
+   *               listener produces.
+   */
+  Listener(kdb::Key const &parent);
+
+  /**
+   * @brief This function will be called after the walker found a value.
+   *
+   * @param text This variable contains the text stored in the value.
+   */
+  void exitValue(std::string const &text);
+
   /**
    * @brief This method returns the key set of the listener.
    *

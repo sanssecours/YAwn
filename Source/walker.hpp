@@ -22,13 +22,14 @@
 class Walker {
 public:
   /**
-   * @brief This method walks a syntax tree to produce some useful information.
+   * @brief This method walks a syntax tree calling methods of the given
+   *        listener.
    *
+   * @param listener This argument specifies the listener which this function
+   *                 uses to convert the syntax tree to a key set.
    * @param root This variable stores the root of the tree this function visits.
-   *
-   * @return A key set representing the data stored in the syntax tree
    */
-  kdb::KeySet walk(yaep_tree_node const *root);
+  void walk(Listener &listener, yaep_tree_node const *root);
 };
 
 #endif // ELEKTRA_PLUGIN_YAWN_WALKER_HPP
