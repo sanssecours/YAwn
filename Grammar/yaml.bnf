@@ -12,20 +12,18 @@ DOUBLE_QUOTED_SCALAR = 10
 COMMENT = 11
 SINGLE_QUOTED_SCALAR = 12;
 
-yaml : STREAM_START child_comments_empty STREAM_END # yaml (1)
-     ;
-
+yaml : STREAM_START child_comments_empty STREAM_END # yaml (1) ;
 child_comments_empty : child # 0
                      | comments
                      |
                      ;
 
+child : value # value ( 0 )
+      ;
+
 comments : COMMENT
          | comments COMMENT
          ;
-
-child : value # value ( 0 )
-      ;
 
 value : PLAIN_SCALAR         # 0
       | SINGLE_QUOTED_SCALAR # 0
