@@ -45,9 +45,8 @@ string toString(yaep_tree_node const *const node, string const indent = "") {
   }
 
   if (node->type == yaep_tree_node_type::YAEP_TERM) {
-    unique_ptr<Token> token =
-        move(*(static_cast<unique_ptr<Token> *>(node->val.term.attr)));
-    return indent + to_string(*token);
+    return indent +
+           to_string(**(static_cast<unique_ptr<Token> *>(node->val.term.attr)));
   }
 
   // Node is abstract
