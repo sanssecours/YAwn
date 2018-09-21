@@ -9,6 +9,7 @@
 // -- Imports ------------------------------------------------------------------
 
 #include <iostream>
+#include <memory>
 
 #include <yaep.h>
 
@@ -19,6 +20,7 @@ using std::cerr;
 using std::endl;
 using std::string;
 using std::to_string;
+using std::unique_ptr;
 
 // -- Class --------------------------------------------------------------------
 
@@ -46,10 +48,9 @@ void ErrorListener::syntaxError(int errorTokenNumber, void *errorTokenData,
                                 void *recoveredTokenData
                                 __attribute__((unused))) {
   errors++;
-  Token *errorToken = static_cast<Token *>(errorTokenData);
-
-  message = "Syntax error on token number " + to_string(errorTokenNumber) +
-            ": “" + errorToken->getText() + "”\n";
+  message =
+      "Syntax error on token number " + to_string(errorTokenNumber) + ": “" +
+      to_string(**static_cast<unique_ptr<Token> *>(errorTokenData)) + "”\n";
   if (ignoredToken > 0) {
     message += "Ignoring " + to_string(recoveredToken - ignoredToken) +
                " tokens starting with token number " + to_string(ignoredToken) +
