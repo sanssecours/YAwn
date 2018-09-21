@@ -27,5 +27,6 @@ comments : COMMENT
 child : value # value ( 0 )
       ;
 
-value : PLAIN_SCALAR # 0
+value : PLAIN_SCALAR         # 0
+      | SINGLE_QUOTED_SCALAR # 0
       ;
