@@ -11,6 +11,7 @@
 #include <iostream>
 #include <memory>
 
+#include "listener.hpp"
 #include "token.hpp"
 #include "walker.hpp"
 
@@ -76,5 +77,6 @@ kdb::KeySet Walker::walk(yaep_tree_node const *root) {
   cout << toString(root);
   cout << endl;
 
-  return keys;
+  Listener listener;
+  return listener.getKeySet();
 }

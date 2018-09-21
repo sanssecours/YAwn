@@ -78,6 +78,8 @@ set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/error_listener.cpp
     ${SOURCE_DIRECTORY}/walker.hpp
     ${SOURCE_DIRECTORY}/walker.cpp
+    ${SOURCE_DIRECTORY}/listener.hpp
+    ${SOURCE_DIRECTORY}/listener.cpp
     ${SOURCE_DIRECTORY}/objstack.h)
 
 include_directories("${YAEP_INCLUDE_DIRS}")

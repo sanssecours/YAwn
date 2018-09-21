@@ -17,13 +17,9 @@
 
 // -- Class --------------------------------------------------------------------
 
-/** This class contains methods to convert a YAEP syntax tree for a YAML
+/** This class contains a method to convert a YAEP syntax tree for a YAML
     grammar to a key set. */
 class Walker {
-  /** This variable stores the key set the this walker creates from the
-      syntax tree.  */
-  kdb::KeySet keys;
-
 public:
   /**
    * @brief This method walks a syntax tree to produce some useful information.
