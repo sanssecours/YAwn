@@ -19,6 +19,7 @@
 
 // -- Class --------------------------------------------------------------------
 
+/** This class represents a token emitted by a lexer. */
 class Token {
 
   /** This variable stores the location of this token in the scanned text. */
