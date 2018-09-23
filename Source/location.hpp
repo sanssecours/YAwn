@@ -38,7 +38,7 @@ public:
    *
    * @return A location that mirrors the old location number, except for the
    *         column number of the end position, which was increased by the
-   *         amount `offset`.
+   *         amount `offset`
    */
   Location &operator+=(size_t const offset) {
     end.column += offset;
