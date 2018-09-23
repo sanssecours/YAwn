@@ -126,8 +126,7 @@ string readGrammar(string const &filename) {
  *            given keyset
  * @retval  1 if parsing was successful and the function did change `keySet`
  */
-int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
-                string const &filename) {
+int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   auto const grammar = readGrammar("Grammar/yaml.bnf");
 
   yaep parser;
@@ -162,7 +161,7 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
     return -1;
   }
 
-  Listener listener{keyNew("user", KEY_END, "", KEY_VALUE)};
+  Listener listener{parent};
   walk(listener, root);
   keySet.append(listener.getKeySet());
 
