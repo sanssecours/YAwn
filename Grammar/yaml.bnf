@@ -19,8 +19,9 @@ child_comments_empty : child # 0
                      ;
 
 child : comments_empty node comments_empty # 1 ;
-node : value # value (0)
-     | map   # 0
+node : value    # value (0)
+     | map      # 0
+     | sequence # 0
      ;
 
 comments_empty : comments | ;
@@ -40,3 +41,8 @@ pairs : pair       # 0
       ;
 pair : KEY key VALUE child_comments_empty # pair (1 3) ;
 key : scalar # key (0) ;
+
+sequence : SEQUENCE_START elements BLOCK_END # sequence(1) ;
+elements : element # 0
+         | elements element # elements(0 1) ;
+element : ELEMENT child # element(1) ;
