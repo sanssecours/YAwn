@@ -161,7 +161,7 @@ void Lexer::addSimpleKeyCandidate() {
 }
 
 /**
- * @brief This function checks if the lexer needs to scan additional tokens.
+ * @brief This method checks if the lexer needs to scan additional tokens.
  *
  * @retval true If the lexer should fetch additional tokens
  * @retval false Otherwise
@@ -320,7 +320,7 @@ void Lexer::scanPlainScalar() {
  *        of a plain scalar at position `offset`.
  *
  * @param offset This parameter specifies an offset to the current input
- *               position, where this function searches for non space
+ *               position, where this function searches for non-space
  *               characters.
  *
  * @return The number of non-space characters at the input position `offset`
@@ -439,7 +439,7 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
  *                  the returned token.
  *
  * @return A number specifying the type of the first token the parser has not
- *         emitted yet.
+ *         emitted yet
  */
 int Lexer::nextToken(void **attribute) {
   while (needMoreTokens()) {

@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * @brief This file contains definitions for a basic YAML lexer.
+ * @brief This file contains the declaration of a basic YAML lexer.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
@@ -170,7 +170,7 @@ class Lexer {
   void scanToNextToken();
 
   /**
-   * @brief This function checks if the lexer needs to scan additional tokens.
+   * @brief This method checks if the lexer needs to scan additional tokens.
    *
    * @retval true If the lexer should fetch additional tokens
    * @retval false Otherwise
@@ -216,7 +216,7 @@ class Lexer {
    *        part of a plain scalar at position `offset`.
    *
    * @param offset This parameter specifies an offset to the current input
-   *               position, where this function searches for non space
+   *               position, where this function searches for non-space
    *               characters.
    *
    * @return The number of non-space characters at the input position `offset`
@@ -265,7 +265,7 @@ public:
    *                  the returned token.
    *
    * @return A number specifying the type of the first token the parser has not
-   *         emitted yet.
+   *         emitted yet
    */
   int nextToken(void **attribute);
 };
