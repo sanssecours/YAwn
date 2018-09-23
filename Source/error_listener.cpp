@@ -51,8 +51,7 @@ void ErrorListener::syntaxError(int errorTokenNumber, void *errorTokenData,
       to_string(**static_cast<unique_ptr<Token> *>(errorTokenData)) + "”\n";
   if (ignoredToken > 0) {
     message += "Ignoring " + to_string(recoveredToken - ignoredToken) +
-               " tokens starting with token number " + to_string(ignoredToken) +
-               "”\n";
+               " tokens starting with token number " + to_string(ignoredToken);
   }
 }
 
