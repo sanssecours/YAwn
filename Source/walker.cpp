@@ -68,7 +68,6 @@ string toString(yaep_tree_node const *const node, string const indent = "") {
  *
  * @param listener The function calls methods of this class while it traverses
  *                 the tree.
- *
  * @param node This argument stores the tree node that this function traverses.
  */
 void executeListenerMethods(Listener &listener, yaep_tree_node const *node) {
