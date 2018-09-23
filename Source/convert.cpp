@@ -1,3 +1,11 @@
+/**
+ * @file
+ *
+ * @brief This file contains a basic YAML to `KeySet` converter function.
+ *
+ * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
+ */
+
 // -- Imports ------------------------------------------------------------------
 
 #include <cstdio>

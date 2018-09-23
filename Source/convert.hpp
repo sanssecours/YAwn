@@ -1,7 +1,8 @@
 /**
  * @file
  *
- * @brief This file contains the declaration of a basic YAML converter.
+ * @brief This file contains the declaration of a basic YAML to `KeySet`
+ *        converter function.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
