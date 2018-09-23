@@ -431,15 +431,15 @@ Lexer::Lexer(ifstream &stream) : input{stream} {
 }
 
 /**
- * @brief This method returns the number of the next token produced by the
- *        lexer.
+ * @brief This method returns the next token produced by the lexer.
  *
  * If the lexer found the end of the input, then this function returns `-1`.
  *
  * @param attribute The parser uses this parameter to store auxiliary data for
  *                  the returned token.
  *
- * @return The number of the first token the parser has not emitted yet.
+ * @return A number specifying the type of the first token the parser has not
+ *         emitted yet.
  */
 int Lexer::nextToken(void **attribute) {
   while (needMoreTokens()) {
