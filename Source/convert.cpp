@@ -121,7 +121,7 @@ string readGrammar(string const &filename) {
  *                 function converts.
  *
  * @retval -2 if the file could not be opened for reading
- * @retval -1 if there was a syntax error converting the YAML file
+ * @retval -1 if there was a error converting the YAML file
  * @retval  0 if parsing was successful and the function did not change the
  *            given keyset
  * @retval  1 if parsing was successful and the function did change `keySet`
@@ -150,10 +150,19 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   Lexer lexer{input};
   lexerAddress = &lexer;
 
-  int ambiguousInput;
+  int ambiguousOutput;
   struct yaep_tree_node *root = nullptr;
 
-  parser.parse(nextToken, syntaxError, alloc, nullptr, &root, &ambiguousInput);
+  parser.parse(nextToken, syntaxError, alloc, nullptr, &root, &ambiguousOutput);
+
+  if (ambiguousOutput) {
+    cerr << "The content of file “" + filename +
+                "” showed that the grammar:\n" + grammar +
+                "\nproduces ambiguous output! Please fix the grammar to make "
+                "sure it produces only one unique syntax tree for every kind "
+                "of YAML input.";
+    return -1;
+  }
 
   if (errorListener.getNumberOfErrors() > 0) {
     cerr << "Unable to parse input: " << errorListener.getErrorMessage()
