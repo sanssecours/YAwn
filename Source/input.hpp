@@ -1,7 +1,8 @@
 /**
  * @file
  *
- * @brief This file contains a class that represents textual input.
+ * @brief This file contains the declaration of a class that represents textual
+ *        input.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
