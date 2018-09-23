@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * @brief This file contains a basic tree walker function.
+ * @brief This file contains a tree walker function.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
