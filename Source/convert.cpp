@@ -52,7 +52,7 @@ Memory *parserMemoryAddress;
  *                  the returned token.
  *
  * @return A number specifying the type of the first token the parser has not
- *         emitted yet.
+ *         emitted yet
  */
 int nextToken(void **attribute) { return lexerAddress->nextToken(attribute); }
 
