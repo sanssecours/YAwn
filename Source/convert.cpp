@@ -128,7 +128,7 @@ string readGrammar(string const &filename) {
  */
 int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
                 string const &filename) {
-  auto grammar = readGrammar("Grammar/yaml.bnf");
+  auto const grammar = readGrammar("Grammar/yaml.bnf");
 
   yaep parser;
   if (parser.parse_grammar(1, grammar.c_str()) != 0) {
