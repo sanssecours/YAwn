@@ -8,16 +8,14 @@
 
 // -- Imports ------------------------------------------------------------------
 
-#include <iostream>
 #include <memory>
+#include <string>
 
 #include <yaep.h>
 
 #include "error_listener.hpp"
 #include "token.hpp"
 
-using std::cerr;
-using std::endl;
 using std::string;
 using std::to_string;
 using std::unique_ptr;
