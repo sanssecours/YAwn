@@ -6,8 +6,8 @@
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
 
-#ifndef ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
-#define ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
+#ifndef ELEKTRA_PLUGIN_YAWN_CONVERT_HPP
+#define ELEKTRA_PLUGIN_YAWN_CONVERT_HPP
 
 // -- Imports ------------------------------------------------------------------
 
@@ -34,4 +34,4 @@
 int addToKeySet(kdb::KeySet &keySet, kdb::Key &parent,
                 std::string const &filename);
 
-#endif // ELEKTRA_PLUGIN_YAWN_CONVERTER_HPP
+#endif // ELEKTRA_PLUGIN_YAWN_CONVER_HPP
