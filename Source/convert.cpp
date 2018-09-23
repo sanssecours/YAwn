@@ -12,7 +12,7 @@
 #include "lexer.hpp"
 #include "listener.hpp"
 #include "memory.hpp"
-#include "walker.hpp"
+#include "walk.hpp"
 
 using std::cerr;
 using std::cout;
@@ -158,8 +158,7 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
   }
 
   Listener listener{keyNew("user", KEY_END, "", KEY_VALUE)};
-  Walker walker;
-  walker.walk(listener, root);
+  walk(listener, root);
   keySet.append(listener.getKeySet());
 
   return 0;

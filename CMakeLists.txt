@@ -76,8 +76,8 @@ set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/memory.cpp
     ${SOURCE_DIRECTORY}/error_listener.hpp
     ${SOURCE_DIRECTORY}/error_listener.cpp
-    ${SOURCE_DIRECTORY}/walker.hpp
-    ${SOURCE_DIRECTORY}/walker.cpp
+    ${SOURCE_DIRECTORY}/walk.hpp
+    ${SOURCE_DIRECTORY}/walk.cpp
     ${SOURCE_DIRECTORY}/listener.hpp
     ${SOURCE_DIRECTORY}/listener.cpp
     ${SOURCE_DIRECTORY}/objstack.h)

@@ -1,7 +1,7 @@
 /**
  * @file
  *
- * @brief This file contains the implementation of a basic tree walker.
+ * @brief This file contains a basic tree walker function.
  *
  * @copyright BSD License (see LICENSE.md or https://www.libelektra.org)
  */
@@ -13,7 +13,7 @@
 
 #include "listener.hpp"
 #include "token.hpp"
-#include "walker.hpp"
+#include "walk.hpp"
 
 using std::cerr;
 using std::cout;
@@ -135,17 +135,15 @@ void executeListenerMethods(Listener &listener, yaep_tree_node const *node) {
 
 } // namespace
 
-// -- Class --------------------------------------------------------------------
-
 /**
- * @brief This method walks a syntax tree calling methods of the given
+ * @brief This function walks a syntax tree calling methods of the given
  *        listener.
  *
  * @param listener This argument specifies the listener which this function
  *                 uses to convert the syntax tree to a key set.
  * @param root This variable stores the root of the tree this function visits.
  */
-void Walker::walk(Listener &listener, yaep_tree_node const *root) {
+void walk(Listener &listener, yaep_tree_node const *root) {
   cout << "\n— Syntax Tree —\n\n";
   cout << toString(root);
   cout << endl;
