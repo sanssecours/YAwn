@@ -44,7 +44,7 @@ Memory *parserMemoryAddress;
 // -- Functions ----------------------------------------------------------------
 
 /**
- * @brief This method returns the next token produced by the lexer.
+ * @brief This function returns the next token produced by the lexer.
  *
  * If the lexer found the end of the input, then this function returns `-1`.
  *
@@ -57,7 +57,7 @@ Memory *parserMemoryAddress;
 int nextToken(void **attribute) { return lexerAddress->nextToken(attribute); }
 
 /**
- * @brief This method reacts to syntax errors reported by YAEP’s parsing
+ * @brief This function reacts to syntax errors reported by YAEP’s parsing
  *        engine.
  *
  * @param errorToken This number specifies the token where the error occurred.
@@ -81,7 +81,7 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
 }
 
 /**
- * This method allocates a memory region of the given size.
+ * This function allocates a memory region of the given size.
  *
  * @param size This variable specifies the amount of data this method should
  *             allocate.
