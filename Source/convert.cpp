@@ -147,9 +147,9 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
   lexerAddress = &lexer;
 
   int ambiguousInput;
-  struct yaep_tree_node *root = NULL;
+  struct yaep_tree_node *root = nullptr;
 
-  parser.parse(nextToken, syntaxError, alloc, NULL, &root, &ambiguousInput);
+  parser.parse(nextToken, syntaxError, alloc, nullptr, &root, &ambiguousInput);
 
   if (errorListener.getNumberOfErrors() > 0) {
     cerr << "Unable to parse input: " << errorListener.getErrorMessage()
