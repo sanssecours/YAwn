@@ -15,6 +15,7 @@
 
 // -- Class --------------------------------------------------------------------
 
+/** This class reacts to errors reported by the YAML parser. */
 class ErrorListener {
 
   /** This attribute stores the number of encountered syntax errors. */
