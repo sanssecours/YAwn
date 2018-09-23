@@ -32,6 +32,8 @@ namespace {
  *
  * @param node This argument stores the tree node that this function converts to
  *             a string.
+ *
+ * @return A string representation of the given node
  */
 string toString(yaep_tree_node const *const node, string const indent = "") {
   switch (node->type) {
