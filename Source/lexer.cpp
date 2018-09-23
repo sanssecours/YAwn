@@ -30,13 +30,15 @@ using spdlog::level::trace;
 namespace {
 
 /**
- * Create a token with the given attributes.
+ * @brief Create a token with the given attributes.
  *
  * @param type This number specifies the type of the created token.
  * @param location This number specifies the location of the token in the
  *                 scanned text.
  * @param text This variable specifies the content that should be stored
  *             in the token.
+ *
+ * @return A token storing the data provided as arguments to this function
  */
 unique_ptr<Token> createToken(int const type, Location const &location,
                               string const &text) {
