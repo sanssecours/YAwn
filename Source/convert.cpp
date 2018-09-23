@@ -130,9 +130,6 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent __attribute__((unused)),
                 string const &filename) {
   auto grammar = readGrammar("Grammar/yaml.bnf");
 
-  cout << "— Grammar ————\n\n";
-  cout << grammar << endl;
-
   yaep parser;
   if (parser.parse_grammar(1, grammar.c_str()) != 0) {
     cerr << "Unable to parse grammar:" << parser.error_message() << endl;
