@@ -8,6 +8,7 @@
 
 // -- Imports ------------------------------------------------------------------
 
+#include <cassert>
 #include <iostream>
 #include <memory>
 
