@@ -72,15 +72,12 @@ set(SOURCE_FILES
     ${SOURCE_DIRECTORY}/convert.hpp
     ${SOURCE_DIRECTORY}/convert.cpp
     ${SOURCE_DIRECTORY}/yawn.cpp
-    ${SOURCE_DIRECTORY}/memory.hpp
-    ${SOURCE_DIRECTORY}/memory.cpp
     ${SOURCE_DIRECTORY}/error_listener.hpp
     ${SOURCE_DIRECTORY}/error_listener.cpp
     ${SOURCE_DIRECTORY}/walk.hpp
     ${SOURCE_DIRECTORY}/walk.cpp
     ${SOURCE_DIRECTORY}/listener.hpp
-    ${SOURCE_DIRECTORY}/listener.cpp
-    ${SOURCE_DIRECTORY}/objstack.h)
+    ${SOURCE_DIRECTORY}/listener.cpp)
 
 include_directories("${YAEP_INCLUDE_DIRS}")
 add_executable(yawn ${SOURCE_FILES})

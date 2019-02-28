@@ -19,7 +19,6 @@
 #include "error_listener.hpp"
 #include "lexer.hpp"
 #include "listener.hpp"
-#include "memory.hpp"
 #include "walk.hpp"
 
 using std::cerr;
@@ -39,7 +38,6 @@ namespace {
 
 ErrorListener *errorListenerAdress;
 Lexer *lexerAddress;
-Memory *parserMemoryAddress;
 
 // -- Functions ----------------------------------------------------------------
 
@@ -79,16 +77,6 @@ void syntaxError(int errorToken, void *errorTokenData, int ignoredToken,
                                           ignoredToken, ignoredTokenData,
                                           recoveredToken, recoveredTokenData);
 }
-
-/**
- * This function allocates a memory region of the given size.
- *
- * @param size This variable specifies the amount of data this method should
- *             allocate.
- *
- * @return A pointer to a memory region of the specified size
- */
-void *alloc(int size) { return parserMemoryAddress->allocate(size); }
 
 /**
  * @brief This function reads the content of a given grammar file.
@@ -135,9 +123,6 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
     return EXIT_FAILURE;
   }
 
-  Memory memory;
-  parserMemoryAddress = &memory;
-
   ErrorListener errorListener;
   errorListenerAdress = &errorListener;
 
@@ -153,7 +138,8 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   int ambiguousOutput;
   struct yaep_tree_node *root = nullptr;
 
-  parser.parse(nextToken, syntaxError, alloc, nullptr, &root, &ambiguousOutput);
+  parser.parse(nextToken, syntaxError, nullptr, nullptr, &root,
+               &ambiguousOutput);
 
   if (ambiguousOutput) {
     cerr << "The content of file “" + filename +
@@ -173,6 +159,8 @@ int addToKeySet(CppKeySet &keySet, CppKey &parent, string const &filename) {
   Listener listener{parent};
   walk(listener, root);
   keySet.append(listener.getKeySet());
+
+  yaep::free_tree(root, nullptr, nullptr);
 
   return 0;
 }
